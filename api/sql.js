@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3");
 
-const db = new sqlite3.Database("api.db");
+const db = new sqlite3.Database('./db.sqlite');
 
 db.serialize(function () {
   db.run("CREATE TABLE IF NOT EXISTS Todo (id INTEGER PRIMARY KEY, name TEXT)");
