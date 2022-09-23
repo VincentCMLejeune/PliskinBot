@@ -24,4 +24,3 @@ front/yarn-error.log*
 
 # backend
 api/node_modules
-api/db.sqlite

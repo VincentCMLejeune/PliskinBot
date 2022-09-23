@@ -6,17 +6,40 @@ const axios = require("axios").default;
 
 export default function Todos() {
   const [todos, setTodos] = useState(undefined);
+  const [newTodo, setNewTodo] = useState("");
 
   useEffect(() => {
+    getTodos();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(todos);
+  // }, [todos]);
+  // useEffect(() => {
+  //   console.log(newTodo);
+  // }, [newTodo]);
+
+  const getTodos = () => {
     axios
       .get("http://localhost:9000/todo")
       .then((res) => setTodos(res.data.todos))
       .catch((err) => console.log(err));
-  }, []);
+  };
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+  const addTodo = () => {
+    axios
+      .post("http://localhost:9000/todo", {
+        todo: newTodo,
+      })
+      .then((res) => {
+        console.log(res);
+        getTodos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setNewTodo("");
+  };
 
   return (
     <div>
@@ -30,6 +53,12 @@ export default function Todos() {
       ) : (
         <p>Nothing to do...</p>
       )}
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+      ></input>
+      <button onClick={() => addTodo()}>ADD TODO</button>
     </div>
   );
 }
