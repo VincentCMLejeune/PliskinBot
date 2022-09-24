@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./views/homepage/Home";
-import Todos from "./components/Todos";
+import Sport from "./views/sport/Sport";
 import "./App.css";
 
 export default function App() {
@@ -10,6 +10,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route path="/sports" element={<Sport />} />
         </Routes>
       </BrowserRouter>
     </div>
