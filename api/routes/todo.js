@@ -15,10 +15,20 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  console.log(req.body);
+  console.log("POST request to add : " + req.body);
   try {
-    db.run(`INSERT INTO Todo (name) VALUES ('${req.body.todo}')`);
-    res.status(200).send(req.body);
+    db.run(`INSERT INTO Todo (name) VALUES ("${req.body.todo}")`);
+    res.status(201).send(req.body);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+router.delete("/", (req, res, next) => {
+  console.log("DELETE request to remove : " + req.body.todo);
+  try {
+    db.run(`DELETE FROM Todo WHERE name="${req.body.todo}"`);
+    res.status(204).send();
   } catch (err) {
     res.status(500).send(err);
   }
