@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  console.log("POST request to add : " + req.body);
+  console.log("POST request to add : " + req.body.todo);
   try {
     db.run(`INSERT INTO Todo (name) VALUES ("${req.body.todo}")`);
     res.status(201).send(req.body);
