@@ -4,7 +4,6 @@ Personnal fullstack website to be more organized
 ## Todo
 
 Write installation
-Write how to create a mock database to test website
 
 # Getting Started with Create React App
 
