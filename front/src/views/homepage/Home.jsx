@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import Todos from "../../components/Todos";
+import Todos from "../../components/todos/Todos";
 import "./Home.css";
 
 const axios = require("axios").default;
@@ -27,6 +28,11 @@ export default function Home() {
     <div className="Home">
       <header className="Home-header">
         {testData && <p>{testData}</p>}
+        <div>
+          <Link to="/sports">
+            <button>SPORT</button>
+          </Link>
+        </div>
         <Todos />
       </header>
     </div>
