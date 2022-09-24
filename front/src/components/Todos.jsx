@@ -41,13 +41,29 @@ export default function Todos() {
     setNewTodo("");
   };
 
+  const removeTodo = (todo) => {
+    console.log("Todo to remove : " + todo);
+    axios
+      .delete("http://localhost:9000/todo", { data: { todo: todo } })
+      .then((res) => {
+        console.log(res);
+        getTodos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <h1>Todos :</h1>
-      {todos ? (
+      {todos && todos.length ? (
         <ul>
           {todos.map((todo, index) => (
-            <li key={index}>{todo.name}</li>
+            <div key={index} className="todo-item">
+              <li>{todo.name}</li>
+              <button onClick={() => removeTodo(todo.name)}>REMOVE</button>
+            </div>
           ))}
         </ul>
       ) : (
