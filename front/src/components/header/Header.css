@@ -1,0 +1,11 @@
+@import "../../Fonts.css";
+
+.header {
+  width: 100vw;
+  height: 4rem;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
