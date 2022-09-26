@@ -4,7 +4,7 @@
   animation: glitch 1s linear infinite;
   text-align: left;
   width: 8rem;
-  margin: 1rem auto;
+  margin: 0 auto 1rem auto;
   font-size: 3rem;
   color: #fff;
 }

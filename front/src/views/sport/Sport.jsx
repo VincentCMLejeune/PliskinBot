@@ -6,11 +6,12 @@ import Header from "../../components/header/Header";
 
 export default function Sport() {
   return (
+    <>
+      <Header />
     <div className="sport">
       <div className="sport-laptop-message-left">
         Are you doing sport with a laptop ?
       </div>
-      <Header />
       <div id="title-glitched" title="Sport">
         Sport
       </div>
@@ -18,5 +19,6 @@ export default function Sport() {
         Are you doing sport with a laptop ?
       </div>
     </div>
+    </>
   );
 }
