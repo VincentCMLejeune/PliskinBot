@@ -71,7 +71,7 @@
 }
 
 .sport {
-  background: rgb(23, 15, 30) url("./../../assets/background/grain-dark.png");
+  /* background: rgb(23, 15, 30) url("./../../assets/background/grain-dark.png"); */
   width: 100vw;
   height: 100vh;
 }
@@ -83,7 +83,7 @@
 
 @media only screen and (min-device-width: 700px) {
   .sport {
-    background-color: rgb(7, 7, 71);
+    background-color: cyan;
     width: 700px;
     height: 200vh;
     margin: 0 auto;
@@ -129,4 +129,8 @@
   to {
     transform: translateY(100%);
   }
+}
+
+.sports-list {
+  /* color: white; */
 }
