@@ -8,7 +8,6 @@ const cors = require("cors");
 
 // Routers
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const testAPIRouter = require("./routes/testAPI");
 const todoRouter = require("./routes/todo");
 const fitnessRouter = require("./routes/fitness");
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/todo", todoRouter);
 app.use("/fitness", fitnessRouter);
