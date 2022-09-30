@@ -27,9 +27,10 @@ export default function Todos() {
   };
 
   const addTodo = () => {
+    const cleanTodo = newTodo.replace(/["-']/g, "").trim();
     axios
       .post("http://localhost:9000/todo", {
-        todo: newTodo,
+        todo: cleanTodo,
       })
       .then((res) => {
         console.log(res);
@@ -72,6 +73,7 @@ export default function Todos() {
       <input
         type="text"
         value={newTodo}
+        onKeyDown={(e) => e.key === "Enter" && addTodo()}
         onChange={(e) => setNewTodo(e.target.value)}
       ></input>
       <button onClick={() => addTodo()}>ADD TODO</button>
