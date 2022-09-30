@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./Addsport.css";
 
-const axios = require("axios").default;
+import axios from "axios";
 
 export default function Addsport({ setShowNewSport, getSports }) {
   const [newSport, setNewSport] = useState({

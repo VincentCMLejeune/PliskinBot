@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./Todos.css";
 
-const axios = require("axios").default;
+import axios from "axios";
 
 export default function Todos() {
   const [todos, setTodos] = useState(undefined);
