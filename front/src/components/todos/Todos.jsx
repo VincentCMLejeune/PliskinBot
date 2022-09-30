@@ -72,6 +72,7 @@ export default function Todos() {
       <input
         type="text"
         value={newTodo}
+        onKeyDown={(e) => e.key === "Enter" && addTodo()}
         onChange={(e) => setNewTodo(e.target.value)}
       ></input>
       <button onClick={() => addTodo()}>ADD TODO</button>
