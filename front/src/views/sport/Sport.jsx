@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import "./Sport.css";
 
 import Header from "../../components/header/Header";
 
+import Addsport from "../../components/add sport/Addsport";
+
 const axios = require("axios").default;
 
 export default function Sport() {
+  const [showNewSport, setShowNewSport] = useState(false);
   const [sports, setSports] = useState([]);
   const [sportsFilter, setSportFilter] = useState({
     upper: true,
@@ -38,11 +40,11 @@ export default function Sport() {
           abs: [],
         };
         for (let sport of res.data.fitness) {
-          if (sport.localization === "Upper") {
+          if (sport.localization === "upper") {
             sortedFitness.upper.push(sport);
-          } else if (sport.localization === "Lower") {
+          } else if (sport.localization === "lower") {
             sortedFitness.lower.push(sport);
-          } else if (sport.localization === "Abs") {
+          } else if (sport.localization === "abs") {
             sortedFitness.abs.push(sport);
           }
         }
@@ -54,6 +56,7 @@ export default function Sport() {
   return (
     <>
       <Header />
+      {showNewSport && <Addsport />}
       <div className="sport">
         <div className="sport-laptop-message-left">
           Are you doing sport with a laptop ?
@@ -61,6 +64,7 @@ export default function Sport() {
         <div id="title-glitched" title="Sport">
           Sport
         </div>
+        <button onClick={() => setShowNewSport(true)}>Add Sport</button>
         <div className="sports-filters">
           <label>
             <input
@@ -102,7 +106,7 @@ export default function Sport() {
                 {sports.upper.map((sport, id) => (
                   <div key={id}>
                     <div>{sport.muscle}</div>
-                    <div>{sport.reps}</div>
+                    <div>{sport.weight}</div>
                   </div>
                 ))}
               </>
@@ -115,7 +119,7 @@ export default function Sport() {
                 {sports.lower.map((sport, id) => (
                   <div key={id}>
                     <div>{sport.muscle}</div>
-                    <div>{sport.reps}</div>
+                    <div>{sport.weight}</div>
                   </div>
                 ))}
               </>
@@ -126,7 +130,7 @@ export default function Sport() {
               {sports.abs.map((sport, id) => (
                 <div key={id}>
                   <div>{sport.muscle}</div>
-                  <div>{sport.reps}</div>
+                  <div>{sport.weight}</div>
                 </div>
               ))}
             </>
