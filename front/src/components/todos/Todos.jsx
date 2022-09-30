@@ -27,9 +27,10 @@ export default function Todos() {
   };
 
   const addTodo = () => {
+    const cleanTodo = newTodo.replace(/["-']/g, "").trim();
     axios
       .post("http://localhost:9000/todo", {
-        todo: newTodo,
+        todo: cleanTodo,
       })
       .then((res) => {
         console.log(res);
