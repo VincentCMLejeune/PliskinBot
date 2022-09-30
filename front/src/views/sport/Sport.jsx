@@ -6,7 +6,7 @@ import Header from "../../components/header/Header";
 
 import Addsport from "../../components/add sport/Addsport";
 
-const axios = require("axios").default;
+import axios from "axios";
 
 export default function Sport() {
   const [showNewSport, setShowNewSport] = useState(false);
