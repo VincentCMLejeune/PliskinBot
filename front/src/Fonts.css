@@ -1,3 +1,7 @@
 :root {
   --text: "Fira Mono", monospace;
 }
+
+button {
+  cursor: pointer;
+}
