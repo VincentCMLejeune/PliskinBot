@@ -5,10 +5,10 @@
 const path = require("path");
 const fs = require("fs");
 
-const techs = {};
-let curTech = {};
-let techName = "";
 fs.readdir("../assets/stellaris/technology", (err, files) => {
+  const techs = {};
+  let curTech = {};
+  let techName = "";
   if (err) {
     throw err;
   }
@@ -30,8 +30,8 @@ fs.readdir("../assets/stellaris/technology", (err, files) => {
           techName = tests[i].split(" = {")[0];
           // console.log(techName)
         } else if (tests[i][0] === "}") {
-          console.log(techName)
-          console.log(curTech)
+          console.log(techName);
+          console.log(curTech);
           techs[techName] = curTech;
           curTech = {};
         } else {
@@ -49,6 +49,5 @@ fs.readdir("../assets/stellaris/technology", (err, files) => {
         }
       }
     });
+  console.log(techs);
 });
-
-console.log(techs);
