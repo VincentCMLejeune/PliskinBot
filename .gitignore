@@ -24,3 +24,9 @@ front/yarn-error.log*
 
 # backend
 api/node_modules
+
+# stellaris common files
+api/assets/stellaris
+
+# Stuff that helps me develop but not related
+misc
