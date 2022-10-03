@@ -13,7 +13,7 @@ export default function GithubContribution({ githubData }) {
   const formatDate = (date) => {
     const year = date.getFullYear();
     const month = ("0" + (date.getMonth() + 1)).slice(-2);
-    const day = date.getDate();
+    const day = ("0" + date.getDate()).slice(-2);
     return `${year}-${month}-${day}`;
   };
 
@@ -23,9 +23,9 @@ export default function GithubContribution({ githubData }) {
     setHaveicontributed(today === lastContributionDate);
   }, [githubData.data]);
 
-//   useEffect(() => {
-//     console.log(githubData);
-//   }, [githubData]);
+  //   useEffect(() => {
+  //     console.log(githubData);
+  //   }, [githubData]);
 
   return (
     <div className="github-contribution">

@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Home from "./views/homepage/Home";
 import Sport from "./views/sport/Sport";
+import Loading from "./views/loading/Loading";
 import "./App.css";
 
 export default function App() {
@@ -51,7 +52,7 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       ) : (
-        <h2>Loading...</h2>
+        <Loading />
       )}
     </div>
   );
