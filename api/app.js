@@ -11,7 +11,7 @@ const indexRouter = require("./routes/index");
 const testAPIRouter = require("./routes/testAPI");
 const todoRouter = require("./routes/todo");
 const fitnessRouter = require("./routes/fitness");
-const workRouter = require("./routes/workPlanning");
+const planningRouter = require("./routes/planningPlanning");
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use("/", indexRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/todo", todoRouter);
 app.use("/fitness", fitnessRouter);
-app.use("/work", workRouter);
+app.use("/planning", planningRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
