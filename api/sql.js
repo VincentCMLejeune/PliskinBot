@@ -9,8 +9,8 @@ const db = new sqlite3.Database("./db.sqlite");
 //   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Biceps (dumbbell)', 'upper', 10)");
 //   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Triceps (machine)', 'upper', 10)");
 //   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Leg-press', 'lower', 95)");
-//   db.each("SELECT id, name FROM Fitness", function (err, row) {
-//     console.log(row.id + ": " + row.name);
+//   db.each("SELECT id, muscle FROM Fitness", function (err, row) {
+//     console.log(row.id + ": " + row.muscle);
 //   });
 // });
 
