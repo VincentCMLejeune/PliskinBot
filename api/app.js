@@ -11,7 +11,7 @@ const indexRouter = require("./routes/index");
 const testAPIRouter = require("./routes/testAPI");
 const todoRouter = require("./routes/todo");
 const fitnessRouter = require("./routes/fitness");
-const planningRouter = require("./routes/planningPlanning");
+const planningRouter = require("./routes/planning");
 
 const app = express();
 
