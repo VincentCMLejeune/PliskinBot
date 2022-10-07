@@ -9,7 +9,8 @@ const iterateYear = (year, callback) => {
     );
     const day = {
       date: newDate,
-      day: newDate.getDay(),
+      day: newDate.getDate(),
+      dayOfWeek: newDate.getDay(),
       month: newDate.getMonth(),
       year: newDate.getFullYear(),
     };
