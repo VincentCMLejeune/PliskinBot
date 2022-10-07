@@ -1,16 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-
+// Dependencies
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Components
 import Home from "./views/homepage/Home";
-import Sport from "./views/sport/Sport";
 import Loading from "./views/loading/Loading";
+import Sport from "./views/sport/Sport";
+
+// Styling
 import "./App.css";
 
 export default function App() {
-  const [githubData, setGithubData] = useState(null);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [githubData, setGithubData] = useState(null);
   const [testData, setTestData] = useState(undefined);
 
   useEffect(() => {
