@@ -1,7 +1,7 @@
 const iterateYear = (year) => {
   const firstJanuary = new Date(year, 0, 1);
-  console.log(firstJanuary);
-  for (let i = 1; i < 365; i++) {
+  const numDays = year % 4 === 0 ? 366 : 365;
+  for (let i = 0; i < numDays; i++) {
     const newDate = new Date(
       firstJanuary.getFullYear(),
       firstJanuary.getMonth(),
@@ -10,3 +10,5 @@ const iterateYear = (year) => {
     console.log(newDate);
   }
 };
+
+module.exports = { iterateYear };
