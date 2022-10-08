@@ -84,6 +84,32 @@ export default function Planning({ calendarData, setCalendarData }) {
       });
   };
 
+  const copyPlanningMessage = () => {
+    const frenchMonths = [
+      "de janvier",
+      "de février",
+      "de mars",
+      "d'avril",
+      "de mai",
+      "de juin",
+      "de juillet",
+      "d'août",
+      "de septembre",
+      "d'octobre",
+      "de novembre",
+      "de décembre",
+    ];
+    let message = `Salut Francesca, j'espère que tu vas bien.
+Voici mon planning pour le mois ${frenchMonths[today.getMonth()]} :`;
+    for (const [client, days] of Object.entries(occupationsCount).slice(1)) {
+      message += `
+      * ${client} : ${days} jours`;
+    }
+    message += `
+Bonne journée !`;
+    navigator.clipboard.writeText(message);
+  };
+
   return (
     <>
       {today && (
@@ -121,6 +147,9 @@ export default function Planning({ calendarData, setCalendarData }) {
                     </div>
                   ))}
             </div>
+            <button onClick={() => copyPlanningMessage()}>
+              Generate work message
+            </button>
           </div>
           <h1>Today is {days[today.getDay()]}</h1>
           {today.getDay() === 6 || today.getDay() === 0 ? (
