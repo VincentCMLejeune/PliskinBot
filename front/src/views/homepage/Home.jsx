@@ -6,7 +6,7 @@ import Todos from "../../components/todos/Todos";
 
 import "./Home.css";
 
-export default function Home({ calendarData, githubData }) {
+export default function Home({ calendarData, setCalendarData, githubData }) {
   return (
     <div className="Home">
       <header className="Home-header">

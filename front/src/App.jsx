@@ -74,7 +74,11 @@ export default function App() {
               exact
               path="/"
               element={
-                <Home calendarData={calendarData} githubData={githubData} />
+                <Home
+                  calendarData={calendarData}
+                  setCalendarData={setCalendarData}
+                  githubData={githubData}
+                />
               }
             />
             <Route path="/sports" element={<Sport sportData={sportData} />} />

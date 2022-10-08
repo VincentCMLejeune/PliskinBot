@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import "./Planning.css";
 
-export default function Planning({ calendarData }) {
+export default function Planning({ calendarData, setCalendarData }) {
   const [today, setToday] = useState(null);
   const [colorMap, setColorMap] = useState(null);
   const [inputOccupation, setInputOccupation] = useState("");
