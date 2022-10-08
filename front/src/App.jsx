@@ -13,9 +13,10 @@ import "./App.css";
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [githubData, setGithubData] = useState(null);
-  const [testData, setTestData] = useState(null);
   const [calendarData, setCalendarData] = useState(null);
+  const [githubData, setGithubData] = useState(null);
+  const [sportData, setSportData] = useState(null);
+  const [testData, setTestData] = useState(null);
 
   const calendarUrl = () => {
     const url = "http://localhost:9000/planning/";
@@ -35,6 +36,11 @@ export default function App() {
       .catch((err) => console.log(err));
 
     axios
+      .get("http://localhost:9000/fitness")
+      .then((res) => setSportData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
       .get("https://api.github.com/users/VincentCMLejeune/events")
       .then((res) => setGithubData(res))
       .catch((err) => console.log(err));
@@ -47,12 +53,17 @@ export default function App() {
   }, [testData]);
 
   useEffect(() => {
-    if (testData !== null && githubData !== null && calendarData !== null) {
+    if (
+      calendarData !== null &&
+      githubData !== null &&
+      sportData !== null &&
+      testData !== null
+    ) {
       setDataLoaded(true);
     } else {
       setDataLoaded(false);
     }
-  }, [testData, githubData, calendarData]);
+  }, [calendarData, githubData, sportData, testData]);
 
   return (
     <div className="App">
@@ -63,14 +74,19 @@ export default function App() {
               exact
               path="/"
               element={
-                <Home githubData={githubData} calendarData={calendarData} />
+                <Home calendarData={calendarData} githubData={githubData} />
               }
             />
-            <Route path="/sports" element={<Sport />} />
+            <Route path="/sports" element={<Sport sportData={sportData} />} />
           </Routes>
         </BrowserRouter>
       ) : (
-        <Loading />
+        <Loading
+          calendarData={calendarData}
+          githubData={githubData}
+          testData={testData}
+          sportData={sportData}
+        />
       )}
     </div>
   );
