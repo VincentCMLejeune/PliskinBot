@@ -6,6 +6,7 @@ import "./Planning.css";
 export default function Planning({ calendarData, setCalendarData }) {
   const [today, setToday] = useState(null);
   const [colorMap, setColorMap] = useState(null);
+  const [occupationsCount, setOccupationsCount] = useState(null);
   const [inputOccupation, setInputOccupation] = useState("");
   const days = [
     "Sunday",
@@ -37,6 +38,7 @@ export default function Planning({ calendarData, setCalendarData }) {
 
   useEffect(() => {
     const newColorMap = { free: "green" };
+    const newOccupationsMap = {};
     const colors = ["yellow", "blue", "pink"];
     const calendarOccupations = ["free"];
     let idx = 0;
@@ -46,7 +48,13 @@ export default function Planning({ calendarData, setCalendarData }) {
         calendarOccupations.push(row.occupation);
         idx++;
       }
+      if (newOccupationsMap[row.occupation]) {
+        newOccupationsMap[row.occupation]++;
+      } else {
+        newOccupationsMap[row.occupation] = 1;
+      }
     }
+    setOccupationsCount(newOccupationsMap);
     setColorMap(newColorMap);
   }, [calendarData]);
 
@@ -93,6 +101,25 @@ export default function Planning({ calendarData, setCalendarData }) {
                     {idx + 1}
                   </div>
                 ))}
+            </div>
+            <div>
+              {occupationsCount &&
+                Object.keys(occupationsCount)
+                  .slice(1)
+                  .map((key, index) => (
+                    <div key={index}>
+                      <div
+                        className="Planning-calendar-cube"
+                        style={{ backgroundColor: colorMap[key] }}
+                      ></div>
+                      <div>
+                        {key} :{" "}
+                        {occupationsCount[key] > 1
+                          ? occupationsCount[key] + " days"
+                          : "1 day"}
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
           <h1>Today is {days[today.getDay()]}</h1>
