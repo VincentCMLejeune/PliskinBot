@@ -34,9 +34,9 @@ export default function Planning({ calendarData }) {
   }, []);
 
   useEffect(() => {
-    const newColorMap = {};
-    const colors = ["green", "yellow", "blue", "pink"];
-    const calendarOccupations = [];
+    const newColorMap = { free: "green" };
+    const colors = ["yellow", "blue", "pink"];
+    const calendarOccupations = ['free'];
     let idx = 0;
     for (let row of calendarData.planning) {
       if (calendarOccupations.indexOf(row.occupation) === -1) {
@@ -45,9 +45,7 @@ export default function Planning({ calendarData }) {
         idx++;
       }
     }
-    setColorMap(newColorMap)
-
-    // console.log(calendarData);
+    setColorMap(newColorMap);
   }, [calendarData]);
 
   return (
@@ -63,7 +61,9 @@ export default function Planning({ calendarData }) {
                     key={idx}
                     className="Planning-calendar-cube"
                     style={{ backgroundColor: colorMap[day.occupation] }}
-                  >{idx+1}</div>
+                  >
+                    {idx + 1}
+                  </div>
                 ))}
             </div>
           </div>
