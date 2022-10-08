@@ -14,7 +14,14 @@ import "./App.css";
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [githubData, setGithubData] = useState(null);
-  const [testData, setTestData] = useState(undefined);
+  const [testData, setTestData] = useState(null);
+  const [calendarData, setCalendarData] = useState(null);
+
+  const calendarUrl = () => {
+    const url = "http://localhost:9000/planning/";
+    const today = new Date();
+    return url + today.getFullYear() + "/" + today.getMonth();
+  };
 
   useEffect(() => {
     axios
@@ -23,14 +30,14 @@ export default function App() {
       .catch((err) => console.log(err));
 
     axios
+      .get(calendarUrl())
+      .then((res) => setCalendarData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
       .get("https://api.github.com/users/VincentCMLejeune/events")
-      .then((res) => {
-        setGithubData(res);
-        // console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => setGithubData(res))
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -40,17 +47,25 @@ export default function App() {
   }, [testData]);
 
   useEffect(() => {
-    if (githubData !== null) {
+    if (testData !== null && githubData !== null && calendarData !== null) {
       setDataLoaded(true);
+    } else {
+      setDataLoaded(false);
     }
-  }, [githubData]);
+  }, [testData, githubData, calendarData]);
 
   return (
     <div className="App">
       {dataLoaded ? (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home githubData={githubData} />} />
+            <Route
+              exact
+              path="/"
+              element={
+                <Home githubData={githubData} calendarData={calendarData} />
+              }
+            />
             <Route path="/sports" element={<Sport />} />
           </Routes>
         </BrowserRouter>
