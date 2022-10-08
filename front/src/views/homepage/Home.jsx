@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import GithubContribution from "../../components/github contributions/GithubContribution";
-import Today from "../../components/today/Today";
+import Planning from "../../components/planning/Planning";
 import Todos from "../../components/todos/Todos";
 
 import "./Home.css";
@@ -10,7 +10,7 @@ export default function Home({ calendarData, githubData }) {
   return (
     <div className="Home">
       <header className="Home-header">
-        <Today calendarData={calendarData} />
+        <Planning calendarData={calendarData} />
         <GithubContribution githubData={githubData} />
         <Todos />
         <div>

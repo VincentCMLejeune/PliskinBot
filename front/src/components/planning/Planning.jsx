@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import "./Today.css";
+import "./Planning.css";
 
-export default function Today({ calendarData }) {
+export default function Planning({ calendarData }) {
   const [today, setToday] = useState(null);
   const days = [
     "Sunday",
