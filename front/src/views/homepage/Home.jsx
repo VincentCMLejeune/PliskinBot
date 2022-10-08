@@ -6,11 +6,11 @@ import Todos from "../../components/todos/Todos";
 
 import "./Home.css";
 
-export default function Home({ githubData }) {
+export default function Home({ calendarData, githubData }) {
   return (
     <div className="Home">
       <header className="Home-header">
-        <Today />
+        <Today calendarData={calendarData} />
         <GithubContribution githubData={githubData} />
         <Todos />
         <div>
