@@ -10,7 +10,7 @@ export default function Home({ calendarData, setCalendarData, githubData }) {
   return (
     <div className="Home">
       <header className="Home-header">
-        <Planning calendarData={calendarData} />
+        <Planning calendarData={calendarData} setCalendarData={setCalendarData} />
         <GithubContribution githubData={githubData} />
         <Todos />
         <div>
