@@ -69,7 +69,7 @@ planningRouter.put("/:year/:month/:day", (req, res, next) => {
       console.log(err);
       res.sendStatus(500);
     } else {
-      res.redirect(`/planning/${year}/${month}/${day}`);
+      res.sendStatus(200);
     }
   });
 });
