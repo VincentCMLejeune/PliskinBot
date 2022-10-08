@@ -12,7 +12,3 @@
 .Loading-items .Loaded-item {
   color: green;
 }
-
-.Loading-items .Loaded-error {
-  background-color: lightcoral;
-}

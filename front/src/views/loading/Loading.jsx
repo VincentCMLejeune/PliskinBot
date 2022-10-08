@@ -11,7 +11,6 @@ export default function Loading({ dataLoaded }) {
               <li className={data.isLoaded ? "Loaded-item" : ""}>
                 {data.name}
               </li>
-              {data.error && <div className="Loaded-error">{data.error}</div>}
             </div>
           ))}
         </ul>
