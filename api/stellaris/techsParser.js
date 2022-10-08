@@ -2,24 +2,21 @@
 // and deliver them in object forms to the front-end
 
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs").promises;
 
 // TODO : ADD POTENTIAL
 async function listFiles() {
   try {
-    return await fs.promises.readdir("../assets/stellaris/technology")
+    return await fs.readdir("../assets/stellaris/technology");
   } catch (err) {
-    console.error('Error occurred while reading directory!', err);
+    console.error("Error occurred while reading directory!", err);
   }
 }
 
 let files = listFiles();
-files.then(function(result) {
-  console.log(result)
-})
-
-
-
+files.then(function (result) {
+  console.log(result);
+});
 
 const parseTechs = () => {
   fs.readdir("../assets/stellaris/technology", (err, files) => {
@@ -68,7 +65,7 @@ const parseTechs = () => {
           }
         }
       });
-    console.log(techs)
+    console.log(techs);
   });
 };
 
