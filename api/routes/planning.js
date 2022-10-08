@@ -14,9 +14,37 @@ planningRouter.get("/", (req, res, next) => {
   });
 });
 
+planningRouter.get("/:year", (req, res, next) => {
+  db.all(
+    `SELECT * FROM Calendar WHERE year="${req.params.year}"`,
+    (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send({ planning: rows });
+      }
+    }
+  );
+});
+
 planningRouter.get("/:year/:month", (req, res, next) => {
   db.all(
     `SELECT * FROM Calendar WHERE year="${req.params.year}" AND month="${req.params.month}"`,
+    (err, rows) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send({ planning: rows });
+      }
+    }
+  );
+});
+
+planningRouter.get("/:year/:month/:day", (req, res, next) => {
+  db.all(
+    `SELECT * FROM Calendar WHERE year="${req.params.year}" AND month="${req.params.month}" AND day="${req.params.day}"`,
     (err, rows) => {
       if (err) {
         console.log(err);
