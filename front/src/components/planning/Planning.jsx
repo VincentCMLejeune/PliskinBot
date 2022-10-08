@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 import "./Planning.css";
@@ -5,6 +6,7 @@ import "./Planning.css";
 export default function Planning({ calendarData }) {
   const [today, setToday] = useState(null);
   const [colorMap, setColorMap] = useState(null);
+  const [inputOccupation, setInputOccupation] = useState("");
   const days = [
     "Sunday",
     "Monday",
@@ -36,7 +38,7 @@ export default function Planning({ calendarData }) {
   useEffect(() => {
     const newColorMap = { free: "green" };
     const colors = ["yellow", "blue", "pink"];
-    const calendarOccupations = ['free'];
+    const calendarOccupations = ["free"];
     let idx = 0;
     for (let row of calendarData.planning) {
       if (calendarOccupations.indexOf(row.occupation) === -1) {
@@ -47,6 +49,28 @@ export default function Planning({ calendarData }) {
     }
     setColorMap(newColorMap);
   }, [calendarData]);
+
+  const saveOccupation = (e) => {
+    e.preventDefault();
+    console.log(inputOccupation);
+    const url =
+      "http://localhost:9000/planning/" +
+      today.getFullYear() +
+      "/" +
+      today.getMonth() +
+      "/" +
+      today.getDate();
+    console.log(url);
+
+    const stopIterating = inputOccupation;
+
+    axios
+      .put(url, {
+        occupation: stopIterating,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -69,7 +93,17 @@ export default function Planning({ calendarData }) {
           </div>
           <h1>Today is {days[today.getDay()]}</h1>
           {today.getDay() === 6 || today.getDay() === 0 ? (
-            <div>Yay, no work</div>
+            // <div>Yay, no work</div>
+            <div>
+              <label>What's the plan today ?</label>
+              <input
+                type="text"
+                value={inputOccupation}
+                onChange={(e) => setInputOccupation(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && saveOccupation(e)}
+              />
+              <button onClick={(e) => saveOccupation(e)}>SAVE</button>
+            </div>
           ) : (
             <div>Work, bitch</div>
           )}
