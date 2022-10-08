@@ -107,7 +107,7 @@ export default function Planning({ calendarData, setCalendarData }) {
                 Object.keys(occupationsCount)
                   .slice(1)
                   .map((key, index) => (
-                    <div key={index}>
+                    <div key={index} className="Planning-calendar-count">
                       <div
                         className="Planning-calendar-cube"
                         style={{ backgroundColor: colorMap[key] }}
