@@ -52,7 +52,7 @@ const parseTechs = () => {
           }
         }
       });
-    Promise.resolve();
+    console.log(techs)
   });
 };
 
