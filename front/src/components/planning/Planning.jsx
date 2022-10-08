@@ -52,24 +52,28 @@ export default function Planning({ calendarData, setCalendarData }) {
 
   const saveOccupation = (e) => {
     e.preventDefault();
-    console.log(inputOccupation);
-    const url =
+    const urlMonth =
       "http://localhost:9000/planning/" +
       today.getFullYear() +
       "/" +
-      today.getMonth() +
-      "/" +
-      today.getDate();
-    console.log(url);
-
+      today.getMonth();
+    const url = urlMonth + "/" + today.getDate();
     const stopIterating = inputOccupation;
-
     axios
       .put(url, {
         occupation: stopIterating,
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        axios
+          .get(urlMonth)
+          .then((res) => setCalendarData(res.data))
+          .catch((err) => console.log(err));
+        setInputOccupation("");
+      })
+      .catch((err) => {
+        console.log(err);
+        setInputOccupation("");
+      });
   };
 
   return (
