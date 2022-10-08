@@ -56,4 +56,22 @@ planningRouter.get("/:year/:month/:day", (req, res, next) => {
   );
 });
 
+planningRouter.put("/:year/:month/:day", (req, res, next) => {
+  const year = req.params.year;
+  const month = req.params.month;
+  const day = req.params.day;
+  const occupation = req.body.occupation;
+  const params = [occupation, year, month, day];
+  const sql =
+    "UPDATE Calendar SET occupation = ? WHERE year = ? AND month = ? AND day = ?";
+  db.run(sql, params, (err) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.redirect(`/planning/${year}/${month}/${day}`);
+    }
+  });
+});
+
 module.exports = planningRouter;
