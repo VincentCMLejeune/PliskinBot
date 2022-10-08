@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 
 import "./Today.css";
 
-// import axios from "axios";
-
-export default function Today() {
+export default function Today({ calendarData }) {
   const [today, setToday] = useState(null);
   const days = [
     "Sunday",
@@ -34,15 +32,20 @@ export default function Today() {
     setToday(new Date());
   }, []);
 
-  // useEffect(() => {
-  //   console.log(today);
-  // }, [today]);
+  useEffect(() => {
+    console.log(calendarData);
+  }, [calendarData]);
 
   return (
     <>
       {today && (
         <div>
           <h1>Today is {days[today.getDay()]}</h1>
+          {today.getDay() === 6 || today.getDay() === 0 ? (
+            <div>Yay, no work</div>
+          ) : (
+            <div>Work, bitch</div>
+          )}
         </div>
       )}
     </>
