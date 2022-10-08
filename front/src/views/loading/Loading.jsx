@@ -1,18 +1,26 @@
 import "./Loading.css";
 
-export default function Loading({ dataLoaded }) {
+export default function Loading({
+  calendarData,
+  githubData,
+  testData,
+  sportData,
+}) {
   return (
     <div className="Loading">
       <h1>Loading...</h1>
       <div className="Loading-items">
         <ul>
-          {Object.values(dataLoaded).map((data, index) => (
-            <div key={index}>
-              <li className={data.isLoaded ? "Loaded-item" : ""}>
-                {data.name}
-              </li>
-            </div>
-          ))}
+          <li className={testData !== null ? "Loaded-item" : ""}>Test data</li>
+          <li className={sportData !== null ? "Loaded-item" : ""}>
+            Sports data
+          </li>
+          <li className={calendarData !== null ? "Loaded-item" : ""}>
+            Calendar data
+          </li>
+          <li className={githubData !== null ? "Loaded-item" : ""}>
+            GitHub data
+          </li>
         </ul>
       </div>
     </div>
