@@ -4,9 +4,7 @@ import "./Planning.css";
 
 export default function Planning({ calendarData }) {
   const [today, setToday] = useState(null);
-  const [colorMap, setColorMap] = useState({
-    free: "green",
-  });
+  const [colorMap, setColorMap] = useState(null);
   const days = [
     "Sunday",
     "Monday",
@@ -36,7 +34,20 @@ export default function Planning({ calendarData }) {
   }, []);
 
   useEffect(() => {
-    console.log(calendarData);
+    const newColorMap = {};
+    const colors = ["green", "yellow", "blue", "pink"];
+    const calendarOccupations = [];
+    let idx = 0;
+    for (let row of calendarData.planning) {
+      if (calendarOccupations.indexOf(row.occupation) === -1) {
+        newColorMap[row.occupation] = colors[idx];
+        calendarOccupations.push(row.occupation);
+        idx++;
+      }
+    }
+    setColorMap(newColorMap)
+
+    // console.log(calendarData);
   }, [calendarData]);
 
   return (
@@ -46,13 +57,14 @@ export default function Planning({ calendarData }) {
           <div>
             <div>{months[today.getMonth()]}</div>
             <div className="Planning-calendar-cubes">
-              {calendarData.planning.map((day, idx) => (
-                <div
-                  key={idx}
-                  className="Planning-calendar-cube"
-                  style={{ backgroundColor: colorMap[day.occupation] }}
-                ></div>
-              ))}
+              {colorMap &&
+                calendarData.planning.map((day, idx) => (
+                  <div
+                    key={idx}
+                    className="Planning-calendar-cube"
+                    style={{ backgroundColor: colorMap[day.occupation] }}
+                  >{idx+1}</div>
+                ))}
             </div>
           </div>
           <h1>Today is {days[today.getDay()]}</h1>
