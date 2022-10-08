@@ -97,7 +97,8 @@ export default function Planning({ calendarData, setCalendarData }) {
           </div>
           <h1>Today is {days[today.getDay()]}</h1>
           {today.getDay() === 6 || today.getDay() === 0 ? (
-            // <div>Yay, no work</div>
+            <div>Yay, no work</div>
+          ) : (
             <div>
               <label>What's the plan today ?</label>
               <input
@@ -108,8 +109,6 @@ export default function Planning({ calendarData, setCalendarData }) {
               />
               <button onClick={(e) => saveOccupation(e)}>SAVE</button>
             </div>
-          ) : (
-            <div>Work, bitch</div>
           )}
         </div>
       )}
