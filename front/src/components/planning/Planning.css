@@ -1,0 +1,23 @@
+@import "../../Fonts.css";
+
+.Planning-calendar-cubes {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Planning-calendar-cube {
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  font-size: 8px;
+}
+
+.Planning-calendar-count {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}

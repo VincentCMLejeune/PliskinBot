@@ -13,8 +13,16 @@ import "./App.css";
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [calendarData, setCalendarData] = useState(null);
   const [githubData, setGithubData] = useState(null);
-  const [testData, setTestData] = useState(undefined);
+  const [sportData, setSportData] = useState(null);
+  const [testData, setTestData] = useState(null);
+
+  const calendarUrl = () => {
+    const url = "http://localhost:9000/planning/";
+    const today = new Date();
+    return url + today.getFullYear() + "/" + today.getMonth();
+  };
 
   useEffect(() => {
     axios
@@ -23,14 +31,19 @@ export default function App() {
       .catch((err) => console.log(err));
 
     axios
+      .get(calendarUrl())
+      .then((res) => setCalendarData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
+      .get("http://localhost:9000/fitness")
+      .then((res) => setSportData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
       .get("https://api.github.com/users/VincentCMLejeune/events")
-      .then((res) => {
-        setGithubData(res);
-        // console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => setGithubData(res))
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -40,22 +53,44 @@ export default function App() {
   }, [testData]);
 
   useEffect(() => {
-    if (githubData !== null) {
+    if (
+      calendarData !== null &&
+      githubData !== null &&
+      sportData !== null &&
+      testData !== null
+    ) {
       setDataLoaded(true);
+    } else {
+      setDataLoaded(false);
     }
-  }, [githubData]);
+  }, [calendarData, githubData, sportData, testData]);
 
   return (
     <div className="App">
       {dataLoaded ? (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home githubData={githubData} />} />
-            <Route path="/sports" element={<Sport />} />
+            <Route
+              exact
+              path="/"
+              element={
+                <Home
+                  calendarData={calendarData}
+                  setCalendarData={setCalendarData}
+                  githubData={githubData}
+                />
+              }
+            />
+            <Route path="/sports" element={<Sport sportData={sportData} />} />
           </Routes>
         </BrowserRouter>
       ) : (
-        <Loading />
+        <Loading
+          calendarData={calendarData}
+          githubData={githubData}
+          testData={testData}
+          sportData={sportData}
+        />
       )}
     </div>
   );

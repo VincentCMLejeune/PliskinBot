@@ -1,5 +1,14 @@
-@import '../../Fonts.css';
+@import "../../Fonts.css";
 
 .Loading {
   text-align: center;
+}
+
+.Loading-items {
+  display: flex;
+  color: red;
+}
+
+.Loading-items .Loaded-item {
+  color: green;
 }

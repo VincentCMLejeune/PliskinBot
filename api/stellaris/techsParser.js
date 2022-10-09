@@ -32,6 +32,7 @@ const parseTechs = () => {
           } else if (tests[i][0] === "}") {
             // console.log(techName);
             // console.log(curTech);
+            curTech.key = techName;
             techs[techName] = curTech;
             curTech = {};
           } else {
@@ -52,8 +53,10 @@ const parseTechs = () => {
           }
         }
       });
-    Promise.resolve();
+    console.log(techs);
   });
 };
+
+parseTechs();
 
 module.exports = parseTechs;

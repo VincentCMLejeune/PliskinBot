@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 
-import "./Sport.css";
-
+import Addsport from "../../components/add sport/Addsport";
 import Header from "../../components/header/Header";
 
-import Addsport from "../../components/add sport/Addsport";
+import "./Sport.css";
 
-import axios from "axios";
-
-export default function Sport() {
+export default function Sport({ sportData }) {
   const [showNewSport, setShowNewSport] = useState(false);
   const [sports, setSports] = useState([]);
   const [sportsFilter, setSportFilter] = useState({
@@ -18,40 +15,22 @@ export default function Sport() {
   });
 
   useEffect(() => {
-    getSports();
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(sportsFilter);
-  // }, [sportsFilter]);
-
-  // useEffect(() => {
-  //   console.log(sports);
-  // }, [sports]);
-
-  const getSports = () => {
-    axios
-      .get("http://localhost:9000/fitness")
-      .then((res) => {
-        // console.log(res.data.fitness);
-        const sortedFitness = {
-          upper: [],
-          lower: [],
-          abs: [],
-        };
-        for (let sport of res.data.fitness) {
-          if (sport.localization === "upper") {
-            sortedFitness.upper.push(sport);
-          } else if (sport.localization === "lower") {
-            sortedFitness.lower.push(sport);
-          } else if (sport.localization === "abs") {
-            sortedFitness.abs.push(sport);
-          }
-        }
-        setSports(sortedFitness);
-      })
-      .catch((err) => console.log(err));
-  };
+    const sortedFitness = {
+      upper: [],
+      lower: [],
+      abs: [],
+    };
+    for (let sport of sportData.fitness) {
+      if (sport.localization === "upper") {
+        sortedFitness.upper.push(sport);
+      } else if (sport.localization === "lower") {
+        sortedFitness.lower.push(sport);
+      } else if (sport.localization === "abs") {
+        sortedFitness.abs.push(sport);
+      }
+    }
+    setSports(sortedFitness);
+  }, [sportData]);
 
   return (
     <>
