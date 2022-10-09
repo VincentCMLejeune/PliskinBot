@@ -164,6 +164,14 @@ Bonne journée !`;
                 onKeyDown={(e) => e.key === "Enter" && saveOccupation(e)}
               />
               <button onClick={(e) => saveOccupation(e)}>SAVE</button>
+              <div>
+                {occupationsCount &&
+                  Object.keys(occupationsCount).map((key, index) => (
+                    <button key={index} onClick={() => setInputOccupation(key)}>
+                      {key}
+                    </button>
+                  ))}
+              </div>
             </div>
           )}
         </div>
