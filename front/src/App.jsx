@@ -63,13 +63,14 @@ export default function App() {
       calendarData !== null &&
       githubData !== null &&
       sportData !== null &&
+      stellarisData !== null &&
       testData !== null
     ) {
       setDataLoaded(true);
     } else {
       setDataLoaded(false);
     }
-  }, [calendarData, githubData, sportData, testData]);
+  }, [calendarData, githubData, sportData, stellarisData, testData]);
 
   return (
     <div className="App">
@@ -95,6 +96,7 @@ export default function App() {
           calendarData={calendarData}
           githubData={githubData}
           testData={testData}
+          stellarisData={stellarisData}
           sportData={sportData}
         />
       )}

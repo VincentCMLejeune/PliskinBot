@@ -5,6 +5,7 @@ export default function Loading({
   githubData,
   testData,
   sportData,
+  stellarisData,
 }) {
   return (
     <div className="Loading">
@@ -17,6 +18,9 @@ export default function Loading({
           </li>
           <li className={calendarData !== null ? "Loaded-item" : ""}>
             Calendar data
+          </li>
+          <li className={stellarisData !== null ? "Loaded-item" : ""}>
+            Stellaris data
           </li>
           <li className={githubData !== null ? "Loaded-item" : ""}>
             GitHub data
