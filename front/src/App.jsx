@@ -16,6 +16,7 @@ export default function App() {
   const [calendarData, setCalendarData] = useState(null);
   const [githubData, setGithubData] = useState(null);
   const [sportData, setSportData] = useState(null);
+  const [stellarisData, setStellarisData] = useState(null);
   const [testData, setTestData] = useState(null);
 
   const calendarUrl = () => {
@@ -38,6 +39,11 @@ export default function App() {
     axios
       .get("http://localhost:9000/fitness")
       .then((res) => setSportData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
+      .get("http://localhost:9000/stellaris")
+      .then((res) => setStellarisData(res.data))
       .catch((err) => console.log(err));
 
     axios
