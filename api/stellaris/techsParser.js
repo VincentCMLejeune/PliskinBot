@@ -1,13 +1,13 @@
-// This route is read-only, to fetch (and update) the tech trees from common files
-// and deliver them in object forms to the front-end
+// It works, but it reads twice "tech_space_cloud_weapon_1", which appears only once in the techs txt
 
 const path = require("path");
 const fs = require("fs");
+const sqlite3 = require("sqlite3");
+const db = new sqlite3.Database("../db.sqlite");
 
 // TODO : ADD POTENTIAL
 const parseTechs = () => {
   fs.readdir("../assets/stellaris/technology", (err, files) => {
-    const techs = {};
     let curTech = {};
     let techName = "";
     if (err) {
@@ -30,14 +30,20 @@ const parseTechs = () => {
             techName = tests[i].split(" = {")[0];
           } else if (tests[i][0] === "}") {
             curTech.key = techName;
-            techs[techName] = curTech;
+            if (!curTech.prerequisites) {
+              curTech.prerequisites = null;
+            }
+            db.run(
+              "INSERT INTO Stellaris (id, area, tier, prereq) VALUES (?, ?, ?, ?)",
+              [curTech.key, curTech.area, curTech.tier, curTech.prerequisites]
+            );
             curTech = {};
           } else {
             let splitedLine = tests[i].trim().split(" = ");
             if (splitedLine[0] === "area" && !curTech.area) {
               curTech.area = splitedLine[1];
             } else if (splitedLine[0] === "tier" && !curTech.tier) {
-              curTech.tier = splitedLine[1];
+              curTech.tier = Number(splitedLine[1]);
             } else if (
               splitedLine[0] === "prerequisites" &&
               !curTech.prerequisites
@@ -55,5 +61,3 @@ const parseTechs = () => {
 };
 
 parseTechs();
-
-module.exports = parseTechs;
