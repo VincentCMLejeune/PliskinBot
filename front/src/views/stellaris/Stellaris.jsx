@@ -2,8 +2,11 @@ import "./Stellaris.css";
 
 export default function Stellaris({ stellarisData }) {
   return (
-    <div>
-      <h1>Stellaris page</h1>
+    <div className="Stellaris">
+      <div className="Stellaris-shadowed-background"></div>
+      <div className="Stellaris-content">
+        <h1>Stellaris</h1>
+      </div>
     </div>
   );
 }
