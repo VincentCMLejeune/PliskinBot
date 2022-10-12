@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/homepage/Home";
 import Loading from "./views/loading/Loading";
 import Sport from "./views/sport/Sport";
+import Stellaris from "./views/stellaris/Stellaris";
 
 // Styling
 import "./App.css";
@@ -89,6 +90,10 @@ export default function App() {
               }
             />
             <Route path="/sports" element={<Sport sportData={sportData} />} />
+            <Route
+              path="/stellaris"
+              element={<Stellaris stellarisData={stellarisData} />}
+            />
           </Routes>
         </BrowserRouter>
       ) : (
