@@ -28,10 +28,7 @@ const parseTechs = () => {
         for (let i = 0; i < tests.length; i++) {
           if (tests[i][0] === "t") {
             techName = tests[i].split(" = {")[0];
-            // console.log(techName)
           } else if (tests[i][0] === "}") {
-            // console.log(techName);
-            // console.log(curTech);
             curTech.key = techName;
             techs[techName] = curTech;
             curTech = {};
@@ -48,12 +45,12 @@ const parseTechs = () => {
               curTech.prerequisites = splitedLine[1]
                 .split(" ")
                 .slice(1, -1)
-                .map((tech) => tech.substring(1, tech.length - 1));
+                .map((tech) => tech.substring(1, tech.length - 1))
+                .join("&");
             }
           }
         }
       });
-    console.log(techs);
   });
 };
 
