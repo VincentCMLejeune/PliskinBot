@@ -58,7 +58,7 @@ export default function Planning({ calendarData, setCalendarData }) {
     setColorMap(newColorMap);
   }, [calendarData]);
 
-  const saveOccupation = (e) => {
+  const saveOccupation = (e, occupationParam = undefined) => {
     e.preventDefault();
     const urlMonth =
       "http://localhost:9000/planning/" +
@@ -66,12 +66,12 @@ export default function Planning({ calendarData, setCalendarData }) {
       "/" +
       today.getMonth();
     const url = urlMonth + "/" + today.getDate();
-    const stopIterating = inputOccupation;
+    const occupation = occupationParam ? occupationParam : inputOccupation;
     axios
       .put(url, {
-        occupation: stopIterating,
+        occupation: occupation,
       })
-      .then((res) => {
+      .then(() => {
         axios
           .get(urlMonth)
           .then((res) => setCalendarData(res.data))
@@ -167,7 +167,7 @@ Bonne journée !`;
               <div>
                 {occupationsCount &&
                   Object.keys(occupationsCount).map((key, index) => (
-                    <button key={index} onClick={() => setInputOccupation(key)}>
+                    <button key={index} onClick={(e) => saveOccupation(e, key)}>
                       {key}
                     </button>
                   ))}
