@@ -7,7 +7,6 @@ const logger = require("morgan");
 const cors = require("cors");
 
 // Routers
-const indexRouter = require("./routes/index");
 const testAPIRouter = require("./routes/testAPI");
 const todoRouter = require("./routes/todo");
 const fitnessRouter = require("./routes/fitness");
@@ -26,7 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
 app.use("/testAPI", testAPIRouter);
 app.use("/todo", todoRouter);
 app.use("/fitness", fitnessRouter);
