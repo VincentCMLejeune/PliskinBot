@@ -26,3 +26,13 @@
   position: relative;
   z-index: 3;
 }
+
+.Stellaris-content-category {
+  display: flex;
+  flex-direction: row;
+}
+
+.Stellaris-content-category-column {
+  display: flex;
+  flex-direction: column;
+}
