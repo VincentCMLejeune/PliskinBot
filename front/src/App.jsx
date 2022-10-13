@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./views/homepage/Home";
 import Loading from "./views/loading/Loading";
 import Sport from "./views/sport/Sport";
+import Stellaris from "./views/stellaris/Stellaris";
 
 // Styling
 import "./App.css";
@@ -16,6 +17,7 @@ export default function App() {
   const [calendarData, setCalendarData] = useState(null);
   const [githubData, setGithubData] = useState(null);
   const [sportData, setSportData] = useState(null);
+  const [stellarisData, setStellarisData] = useState(null);
   const [testData, setTestData] = useState(null);
 
   const calendarUrl = () => {
@@ -41,6 +43,11 @@ export default function App() {
       .catch((err) => console.log(err));
 
     axios
+      .get("http://localhost:9000/stellaris")
+      .then((res) => setStellarisData(res.data))
+      .catch((err) => console.log(err));
+
+    axios
       .get("https://api.github.com/users/VincentCMLejeune/events")
       .then((res) => setGithubData(res))
       .catch((err) => console.log(err));
@@ -57,13 +64,14 @@ export default function App() {
       calendarData !== null &&
       githubData !== null &&
       sportData !== null &&
+      stellarisData !== null &&
       testData !== null
     ) {
       setDataLoaded(true);
     } else {
       setDataLoaded(false);
     }
-  }, [calendarData, githubData, sportData, testData]);
+  }, [calendarData, githubData, sportData, stellarisData, testData]);
 
   return (
     <div className="App">
@@ -82,6 +90,10 @@ export default function App() {
               }
             />
             <Route path="/sports" element={<Sport sportData={sportData} />} />
+            <Route
+              path="/stellaris"
+              element={<Stellaris stellarisData={stellarisData} />}
+            />
           </Routes>
         </BrowserRouter>
       ) : (
@@ -89,6 +101,7 @@ export default function App() {
           calendarData={calendarData}
           githubData={githubData}
           testData={testData}
+          stellarisData={stellarisData}
           sportData={sportData}
         />
       )}

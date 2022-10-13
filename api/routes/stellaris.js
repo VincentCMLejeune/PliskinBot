@@ -1,11 +1,17 @@
-const parseTechs = require("../stellaris/techsParser");
+const express = require("express");
+const stellarisRouter = express.Router();
+const sqlite3 = require("sqlite3");
+const db = new sqlite3.Database("./db.sqlite");
 
-async function printTechs() {
-  const techs = await parseTechs();
-  return techs;
-}
-
-printTechs().then((value) => {
-    console.log(value)
+stellarisRouter.get("/", (req, res, next) => {
+  db.all("SELECT * FROM Stellaris", (err, rows) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.send({ stellaris: rows });
+    }
+  });
 });
-// console.log(techs);
+
+module.exports = stellarisRouter;

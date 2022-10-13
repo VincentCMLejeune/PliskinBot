@@ -1,21 +1,14 @@
-const parseTechs = require("./techsParser");
+const sqlite3 = require("sqlite3");
+const db = new sqlite3.Database("../db.sqlite");
 
-// const sqlite3 = require("sqlite3");
+db.serialize(function () {
+  db.run("DROP TABLE Stellaris");
+  db.run("CREATE TABLE IF NOT EXISTS Stellaris (id TEXT PRIMARY KEY, name TEXT, desc TEXT, area TEXT, tier INTEGER, prereq TEXT DEFAULT NULL, potential TEXT DEFAULT NULL)");
+//   db.run("INSERT INTO Stellaris (id, area, tier) VALUES (?, ?, ?)", ['tech_adaptive_combat_algorithms', "society", 2]);
+//   db.run("INSERT INTO Stellaris (id, area, tier, prereq) VALUES (?, ?, ?, ?)", ['tech_biomechanics', "society", 4, 'tech_adaptive_combat_algorithms']);
+  db.each("SELECT * FROM Stellaris", function (err, row) {
+    console.log(row);
+  });
+});
 
-// const db = new sqlite3.Database("../db.sqlite");
-
-// // As an example, the function ran to delete and create the table Fitness (must be run once through Node)
-// db.serialize(function () {
-//   db.run("DROP TABLE Fitness");
-//   db.run("CREATE TABLE IF NOT EXISTS Fitness (id INTEGER PRIMARY KEY, muscle TEXT, localization TEXT, weight FLOAT)");
-//   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Biceps (dumbbell)', 'upper', 10)");
-//   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Triceps (machine)', 'upper', 10)");
-//   db.run("INSERT INTO Fitness (muscle, localization, weight) VALUES ('Leg-press', 'lower', 95)");
-//   db.each("SELECT id, muscle FROM Fitness", function (err, row) {
-//     console.log(row.id + ": " + row.muscle);
-//   });
-// });
-
-// db.close();
-
-parseTechs()
+db.close();
