@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import GithubContribution from "../../components/github contributions/GithubContribution";
-import Planning from "../../components/planning/Planning";
-import Todos from "../../components/todos/Todos";
+import GithubContribution from "./github contributions/GithubContribution";
+import Planning from "./planning/Planning";
+import Todos from "./todos/Todos";
 
 import "./Home.css";
 

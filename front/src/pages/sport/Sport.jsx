@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import Addsport from "../../components/add sport/Addsport";
-import Header from "../../components/header/Header";
+import Addsport from "./add sport/Addsport";
+import Header from "./header/Header";
 
 import "./Sport.css";
 

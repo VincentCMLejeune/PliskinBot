@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
-import Home from "./views/homepage/Home";
-import Loading from "./views/loading/Loading";
-import Sport from "./views/sport/Sport";
-import Stellaris from "./views/stellaris/Stellaris";
+import Home from "./pages/homepage/Home";
+import Loading from "./pages/loading/Loading";
+import Sport from "./pages/sport/Sport";
+import Stellaris from "./pages/stellaris/Stellaris";
 
 // Styling
 import "./App.css";
