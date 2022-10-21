@@ -4,7 +4,8 @@ Personnal fullstack website to be more organized
 
 ## Installation
 
-CD into ./api and ./front folders and run `npm install`
+```cd ./api && npm install
+cd ../front && npm install```
 
 ## Usage
 
