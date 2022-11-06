@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+import EditDay from "./edit day/EditDay";
+
 import "./Planning.css";
 
 export default function Planning({ calendarData, setCalendarData }) {
-  const [today, setToday] = useState(null);
   const [colorMap, setColorMap] = useState(null);
-  const [occupationsCount, setOccupationsCount] = useState(null);
   const [inputOccupation, setInputOccupation] = useState("");
+  const [occupationsCount, setOccupationsCount] = useState(null);
+  const [dayToEdit, setDayToEdit] = useState(null);
+  const [today, setToday] = useState(null);
   const days = [
     "Sunday",
     "Monday",
@@ -39,7 +42,7 @@ export default function Planning({ calendarData, setCalendarData }) {
   useEffect(() => {
     const newColorMap = { free: "green" };
     const newOccupationsMap = {};
-    const colors = ["yellow", "blue", "pink"];
+    const colors = ["yellow", "blue", "pink", "red", "orange"];
     const calendarOccupations = ["free"];
     let idx = 0;
     for (let row of calendarData.planning) {
@@ -58,14 +61,18 @@ export default function Planning({ calendarData, setCalendarData }) {
     setColorMap(newColorMap);
   }, [calendarData]);
 
-  const saveOccupation = (e, occupationParam = undefined) => {
+  const saveOccupation = (
+    e,
+    occupationParam = undefined,
+    day = today.getDate()
+  ) => {
     e.preventDefault();
     const urlMonth =
       "http://localhost:9000/planning/" +
       today.getFullYear() +
       "/" +
       today.getMonth();
-    const url = urlMonth + "/" + today.getDate();
+    const url = urlMonth + "/" + day;
     const occupation = occupationParam ? occupationParam : inputOccupation;
     axios
       .put(url, {
@@ -114,12 +121,20 @@ Bonne journée !`;
     <>
       {today && (
         <div>
+          {dayToEdit && (
+            <EditDay
+              dayToEdit={dayToEdit}
+              setDayToEdit={setDayToEdit}
+              saveOccupation={saveOccupation}
+            />
+          )}
           <div>
             <div>{months[today.getMonth()]}</div>
             <div className="Planning-calendar-cubes">
               {colorMap &&
                 calendarData.planning.map((day, idx) => (
                   <div
+                    onClick={() => setDayToEdit(day)}
                     key={idx}
                     className="Planning-calendar-cube"
                     style={{ backgroundColor: colorMap[day.occupation] }}
@@ -130,22 +145,20 @@ Bonne journée !`;
             </div>
             <div>
               {occupationsCount &&
-                Object.keys(occupationsCount)
-                  .slice(1)
-                  .map((key, index) => (
-                    <div key={index} className="Planning-calendar-count">
-                      <div
-                        className="Planning-calendar-cube"
-                        style={{ backgroundColor: colorMap[key] }}
-                      ></div>
-                      <div>
-                        {key} :{" "}
-                        {occupationsCount[key] > 1
-                          ? occupationsCount[key] + " days"
-                          : "1 day"}
-                      </div>
+                Object.keys(occupationsCount).map((key, index) => (
+                  <div key={index} className="Planning-calendar-count">
+                    <div
+                      className="Planning-calendar-cube"
+                      style={{ backgroundColor: colorMap[key] }}
+                    ></div>
+                    <div>
+                      {key} :{" "}
+                      {occupationsCount[key] > 1
+                        ? occupationsCount[key] + " days"
+                        : "1 day"}
                     </div>
-                  ))}
+                  </div>
+                ))}
             </div>
             <button onClick={() => copyPlanningMessage()}>
               Generate work message
