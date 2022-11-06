@@ -2,13 +2,10 @@ import { useEffect, useState } from "react";
 
 import "./GithubContribution.css";
 
+import GitHubLogo from "../../../assets/icons/github-logo.svg";
+
 export default function GithubContribution({ githubData }) {
   const [haveicontributed, setHaveicontributed] = useState(null);
-
-  // useEffect(() => {
-  //     const today = new Date();
-  //     console.log(today)
-  // }, [])
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -23,13 +20,19 @@ export default function GithubContribution({ githubData }) {
     setHaveicontributed(today === lastContributionDate);
   }, [githubData.data]);
 
-  //   useEffect(() => {
-  //     console.log(githubData);
-  //   }, [githubData]);
-
   return (
     <div className="github-contribution">
-      <h1>GitHub</h1>
+      <a
+        href="https://github.com/VincentCMLejeune"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src={GitHubLogo}
+          alt="GitHub"
+          className="github-contribution-logo"
+        />
+      </a>
       {haveicontributed !== null && (
         <div className="github-contribution-didicontribute">
           {haveicontributed ? (
