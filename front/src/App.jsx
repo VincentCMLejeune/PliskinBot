@@ -84,6 +84,7 @@ export default function App() {
                   calendarData={calendarData}
                   setCalendarData={setCalendarData}
                   githubData={githubData}
+                  stellarisData={stellarisData}
                 />
               }
             />
