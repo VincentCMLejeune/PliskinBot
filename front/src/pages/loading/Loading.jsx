@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import "./Loading.css";
 
 export default function Loading({
@@ -6,7 +8,17 @@ export default function Loading({
   testData,
   sportData,
   stellarisData,
+  setDataLoaded,
 }) {
+  const [timePassed, setTimePassed] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimePassed((timePassed) => timePassed + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="Loading">
       <h1>Loading...</h1>
@@ -27,6 +39,8 @@ export default function Loading({
           </li>
         </ul>
       </div>
+      <div className="Loading-period">Loading for {timePassed} seconds</div>
+      <button onClick={() => setDataLoaded(true)}>Force Load</button>
     </div>
   );
 }
