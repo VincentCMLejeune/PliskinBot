@@ -25,7 +25,7 @@ export default function Home({
           <Link to="/sports">
             <button>SPORT</button>
           </Link>
-          {stellarisData === null ? (
+          {stellarisData !== null ? (
             <Link to="/stellaris">
               <button>STELLARIS</button>
             </Link>
