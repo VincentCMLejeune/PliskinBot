@@ -35,7 +35,9 @@ export default function Fitness({ fitnessData }) {
   return (
     <>
       <Header />
-      {showNewExercise && <AddExercise />}
+      {showNewExercise && (
+        <AddExercise setShowNewExercise={setShowNewExercise} />
+      )}
       <div className="fitness">
         <div className="fitness-laptop-message-left">
           Are you doing fitness with a laptop ?
