@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import AddExercise from "./add exercise/AddExercise";
+import EditExercise from "./edit exercise/EditExercise";
 import Header from "./header/Header";
 
 import "./Fitness.css";
@@ -8,6 +9,7 @@ import "./Fitness.css";
 export default function Fitness({ fitnessData }) {
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [exercises, setExercises] = useState([]);
+  const [exerciseToEdit, setExerciseToEdit] = useState(null);
   const [fitnessFilter, setFitnessFilter] = useState({
     upper: true,
     lower: true,
@@ -38,6 +40,12 @@ export default function Fitness({ fitnessData }) {
       {showNewExercise && (
         <AddExercise setShowNewExercise={setShowNewExercise} />
       )}
+      {exerciseToEdit !== null && (
+        <EditExercise
+          exerciseToEdit={exerciseToEdit}
+          setExerciseToEdit={setExerciseToEdit}
+        />
+      )}
       <div className="fitness">
         <div className="fitness-laptop-message-left">
           Are you doing fitness with a laptop ?
@@ -45,7 +53,7 @@ export default function Fitness({ fitnessData }) {
         <div id="title-glitched" title="Fitness">
           Fitness
         </div>
-        <button onClick={() => setShowNewExercise(true)}>Add Fitness</button>
+        <button onClick={() => setShowNewExercise(true)}>Add Exercise</button>
         <div className="fitness-filters">
           <label>
             <input
@@ -93,10 +101,13 @@ export default function Fitness({ fitnessData }) {
             exercises.upper.length > 0 && (
               <>
                 <div className="fitness-list-localization">Upper body</div>
-                {exercises.upper.map((fitness, id) => (
+                {exercises.upper.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
@@ -106,10 +117,13 @@ export default function Fitness({ fitnessData }) {
             exercises.lower.length > 0 && (
               <>
                 <div className="fitness-list-localization">Lower body</div>
-                {exercises.lower.map((fitness, id) => (
+                {exercises.lower.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
@@ -119,10 +133,13 @@ export default function Fitness({ fitnessData }) {
             exercises.abs.length > 0 && (
               <>
                 <div className="fitness-list-localization">Abs</div>
-                {exercises.abs.map((fitness, id) => (
+                {exercises.abs.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
