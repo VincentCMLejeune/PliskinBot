@@ -14,4 +14,21 @@ fitnessRouter.get("/", (req, res, next) => {
   });
 });
 
+fitnessRouter.post("/", (req, res, next) => {
+  console.log("POST request to add : " + req.body.muscle);
+  const muscle = req.body.muscle;
+  const localization = req.body.localization;
+  const weight = req.body.weight;
+  const params = [muscle, localization, weight];
+  const sql =
+    "INSERT INTO Fitness (muscle, localization, weight) VALUES (?, ?, ?)";
+  db.run(sql, params, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(req.body);
+    }
+  });
+});
+
 module.exports = fitnessRouter;
