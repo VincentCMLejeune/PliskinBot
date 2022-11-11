@@ -4,7 +4,7 @@ import "./AddExercise.css";
 
 // import axios from "axios";
 
-export default function AddExercise({ setShowNewExercise }) {
+export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
   const [newExercise, setNewExercise] = useState({
     muscle: "",
     localization: "upper",
@@ -21,17 +21,13 @@ export default function AddExercise({ setShowNewExercise }) {
     console.log(exerciseToPost);
   };
 
-  const decrementValue = (initialValue, decrement) => {
-    return Math.max(initialValue - decrement, 0);
-  };
-
   return (
     <>
       <div
-        className="newexercise-shadowbackground"
-        onClick={() => setShowNewExercise(false)}
+        className="editexercise-shadowbackground"
+        onClick={() => setShowEditExercise(false)}
       ></div>
-      <div className="newexercise">
+      <div className="editexercise">
         <h1>NEW EXERCISE</h1>
         <form onSubmit={() => postNewExercise}>
           <label>Muscle:</label>
@@ -84,7 +80,7 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: decrementValue(newExercise.weight, 10),
+                  weight: newExercise.weight - 10,
                 });
               }}
             >
@@ -95,7 +91,7 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: decrementValue(newExercise.weight, 5),
+                  weight: newExercise.weight - 5,
                 });
               }}
             >
@@ -106,35 +102,13 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: decrementValue(newExercise.weight, 1),
+                  weight: newExercise.weight - 1,
                 });
               }}
             >
               -1
             </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: decrementValue(newExercise.weight, 0.5),
-                });
-              }}
-            >
-              -0.5
-            </button>
             <div>{newExercise.weight}</div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight + 0.5,
-                });
-              }}
-            >
-              +0.5
-            </button>
             <button
               onClick={(e) => {
                 e.preventDefault();

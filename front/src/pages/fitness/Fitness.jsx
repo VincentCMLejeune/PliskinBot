@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import AddExercise from "./add exercise/AddExercise";
+import EditExercise from "./edit exercise/EditExercise";
 import Header from "./header/Header";
 
 import "./Fitness.css";
@@ -8,7 +9,8 @@ import "./Fitness.css";
 export default function Fitness({ fitnessData }) {
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [exercises, setExercises] = useState([]);
-  const [fitnesssFilter, setFitnessFilter] = useState({
+  const [exerciseToEdit, setExerciseToEdit] = useState(null);
+  const [fitnessFilter, setFitnessFilter] = useState({
     upper: true,
     lower: true,
     abs: true,
@@ -35,7 +37,15 @@ export default function Fitness({ fitnessData }) {
   return (
     <>
       <Header />
-      {showNewExercise && <AddExercise />}
+      {showNewExercise && (
+        <AddExercise setShowNewExercise={setShowNewExercise} />
+      )}
+      {exerciseToEdit !== null && (
+        <EditExercise
+          exerciseToEdit={exerciseToEdit}
+          setExerciseToEdit={setExerciseToEdit}
+        />
+      )}
       <div className="fitness">
         <div className="fitness-laptop-message-left">
           Are you doing fitness with a laptop ?
@@ -43,16 +53,16 @@ export default function Fitness({ fitnessData }) {
         <div id="title-glitched" title="Fitness">
           Fitness
         </div>
-        <button onClick={() => setShowNewExercise(true)}>Add Fitness</button>
-        <div className="fitnesss-filters">
+        <button onClick={() => setShowNewExercise(true)}>Add Exercise</button>
+        <div className="fitness-filters">
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.upper}
+              checked={fitnessFilter.upper}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  upper: !fitnesssFilter.upper,
+                  ...fitnessFilter,
+                  upper: !fitnessFilter.upper,
                 })
               }
             />
@@ -61,11 +71,11 @@ export default function Fitness({ fitnessData }) {
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.lower}
+              checked={fitnessFilter.lower}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  lower: !fitnesssFilter.lower,
+                  ...fitnessFilter,
+                  lower: !fitnessFilter.lower,
                 })
               }
             />
@@ -74,53 +84,62 @@ export default function Fitness({ fitnessData }) {
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.abs}
+              checked={fitnessFilter.abs}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  abs: !fitnesssFilter.abs,
+                  ...fitnessFilter,
+                  abs: !fitnessFilter.abs,
                 })
               }
             />
             Abs
           </label>
         </div>
-        <div className="fitnesss-list">
-          {fitnesssFilter.upper === true &&
+        <div className="fitness-list">
+          {fitnessFilter.upper === true &&
             exercises.upper &&
             exercises.upper.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Upper body</div>
-                {exercises.upper.map((fitness, id) => (
+                <div className="fitness-list-localization">Upper body</div>
+                {exercises.upper.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
             )}
-          {fitnesssFilter.lower === true &&
+          {fitnessFilter.lower === true &&
             exercises.lower &&
             exercises.lower.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Lower body</div>
-                {exercises.lower.map((fitness, id) => (
+                <div className="fitness-list-localization">Lower body</div>
+                {exercises.lower.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
             )}
-          {fitnesssFilter.abs === true &&
+          {fitnessFilter.abs === true &&
             exercises.abs &&
             exercises.abs.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Abs</div>
-                {exercises.abs.map((fitness, id) => (
+                <div className="fitness-list-localization">Abs</div>
+                {exercises.abs.map((exercise, id) => (
                   <div key={id}>
-                    <div>{fitness.muscle}</div>
-                    <div>{fitness.weight}</div>
+                    <div>{exercise.muscle}</div>
+                    <div>{exercise.weight}</div>
+                    <button onClick={() => setExerciseToEdit(exercise)}>
+                      Edit
+                    </button>
                   </div>
                 ))}
               </>
