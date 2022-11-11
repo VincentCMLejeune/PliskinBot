@@ -68,8 +68,6 @@ export default function App() {
       testData !== null
     ) {
       setDataLoaded(true);
-    } else {
-      setDataLoaded(false);
     }
   }, [calendarData, githubData, sportData, stellarisData, testData]);
 
@@ -103,6 +101,7 @@ export default function App() {
           testData={testData}
           stellarisData={stellarisData}
           sportData={sportData}
+          setDataLoaded={setDataLoaded}
         />
       )}
     </div>
