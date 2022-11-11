@@ -10,6 +10,7 @@ export default function Home({
   calendarData,
   setCalendarData,
   githubData,
+  sportData,
   stellarisData,
 }) {
   return (
@@ -22,15 +23,19 @@ export default function Home({
         <GithubContribution githubData={githubData} />
         <Todos />
         <div>
-          <Link to="/sports">
-            <button>SPORT</button>
-          </Link>
+          {sportData !== null ? (
+            <Link to="/sports">
+              <button>SPORT</button>
+            </Link>
+          ) : (
+            <button id="Home-link-disabled">SPORT UNAVAILABLE</button>
+          )}
           {stellarisData !== null ? (
             <Link to="/stellaris">
               <button>STELLARIS</button>
             </Link>
           ) : (
-            <button id="Stellaris-link-disabled">STELLARIS UNAVAILABLE</button>
+            <button id="Home-link-disabled">STELLARIS UNAVAILABLE</button>
           )}
         </div>
       </header>
