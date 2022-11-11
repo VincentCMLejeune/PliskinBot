@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./AddExercise.css";
 
-import axios from "axios";
+// import axios from "axios";
 
-export default function AddExercise({ setShowNewExercise, getSports }) {
+export default function AddExercise({ setShowNewExercise }) {
   const [newExercise, setNewExercise] = useState({
     muscle: "",
     localization: "upper",
     weight: 20,
   });
-  const [selectedLocalization, setSelectedLocalization] =
-    useState("Upper Body");
 
   const postNewExercise = (e) => {
     e.preventDefault();
@@ -23,13 +21,12 @@ export default function AddExercise({ setShowNewExercise, getSports }) {
     console.log(exerciseToPost);
   };
 
-  useEffect(() => {
-    console.log(newExercise);
-  }, [newExercise]);
-
   return (
     <>
-      <div className="newexercise-shadowbackground"></div>
+      <div
+        className="newexercise-shadowbackground"
+        onClick={() => setShowNewExercise(false)}
+      ></div>
       <div className="newexercise">
         <h1>NEW EXERCISE</h1>
         <form onSubmit={() => postNewExercise}>
