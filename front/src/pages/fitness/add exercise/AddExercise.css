@@ -1,6 +1,6 @@
 @import "../../../Fonts.css";
 
-.newsport-shadowbackground {
+.newexercise-shadowbackground {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   z-index: 15;
 }
 
-.newsport {
+.newexercise {
   background: white;
   top: 10%;
   left: 5vw;
@@ -21,7 +21,7 @@
 }
 
 @media only screen and (min-device-width: 700px) {
-  .newsport {
+  .newexercise {
     left: 25vw;
     width: 50vw;
   }
