@@ -21,6 +21,10 @@ export default function AddExercise({ setShowNewExercise }) {
     console.log(exerciseToPost);
   };
 
+  const decrementValue = (initialValue, decrement) => {
+    return Math.max(initialValue - decrement, 0);
+  };
+
   return (
     <>
       <div
@@ -80,7 +84,7 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: newExercise.weight - 10,
+                  weight: decrementValue(newExercise.weight, 10),
                 });
               }}
             >
@@ -91,7 +95,7 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: newExercise.weight - 5,
+                  weight: decrementValue(newExercise.weight, 5),
                 });
               }}
             >
@@ -102,13 +106,35 @@ export default function AddExercise({ setShowNewExercise }) {
                 e.preventDefault();
                 setNewExercise({
                   ...newExercise,
-                  weight: newExercise.weight - 1,
+                  weight: decrementValue(newExercise.weight, 1),
                 });
               }}
             >
               -1
             </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setNewExercise({
+                  ...newExercise,
+                  weight: decrementValue(newExercise.weight, 0.5),
+                });
+              }}
+            >
+              -0.5
+            </button>
             <div>{newExercise.weight}</div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setNewExercise({
+                  ...newExercise,
+                  weight: newExercise.weight + 0.5,
+                });
+              }}
+            >
+              +0.5
+            </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
