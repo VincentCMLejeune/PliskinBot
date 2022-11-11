@@ -31,4 +31,14 @@ fitnessRouter.post("/", (req, res, next) => {
   });
 });
 
+fitnessRouter.delete("/", (req, res, next) => {
+  console.log("DELETE request to remove : " + req.body.muscle);
+  try {
+    db.run(`DELETE FROM Fitness WHERE muscle="${req.body.muscle}"`);
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = fitnessRouter;
