@@ -1,9 +1,9 @@
 const express = require("express");
-const router = express.Router();
+const todoRouter = express.Router();
 const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("./db.sqlite");
 
-router.get("/", (req, res, next) => {
+todoRouter.get("/", (req, res, next) => {
   db.all("SELECT * FROM Todo", (err, rows) => {
     if (err) {
       console.log(err);
@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
   });
 });
 
-router.post("/", (req, res, next) => {
+todoRouter.post("/", (req, res, next) => {
   console.log("POST request to add : " + req.body.todo);
   try {
     db.run(`INSERT INTO Todo (name) VALUES ("${req.body.todo}")`);
@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
   }
 });
 
-router.delete("/", (req, res, next) => {
+todoRouter.delete("/", (req, res, next) => {
   console.log("DELETE request to remove : " + req.body.todo);
   try {
     db.run(`DELETE FROM Todo WHERE name="${req.body.todo}"`);
@@ -34,4 +34,4 @@ router.delete("/", (req, res, next) => {
   }
 });
 
-module.exports = router;
+module.exports = todoRouter;
