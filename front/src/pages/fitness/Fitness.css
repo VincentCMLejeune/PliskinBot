@@ -70,25 +70,25 @@
   }
 }
 
-.sport {
+.fitness {
   /* background: rgb(23, 15, 30) url("./../../assets/background/grain-dark.png"); */
   width: 100vw;
   height: 100vh;
 }
 
-.sport-laptop-message-left,
-.sport-laptop-message-right {
+.fitness-laptop-message-left,
+.fitness-laptop-message-right {
   display: none;
 }
 
 @media only screen and (min-device-width: 700px) {
-  .sport {
+  .fitness {
     background-color: cyan;
     width: 700px;
     height: 200vh;
     margin: 0 auto;
   }
-  .sport-laptop-message-left {
+  .fitness-laptop-message-left {
     display: inline;
     position: absolute;
     z-index: -1;
@@ -100,7 +100,7 @@
     animation: scroll-up 15s linear infinite;
   }
 
-  .sport-laptop-message-right {
+  .fitness-laptop-message-right {
     display: inline;
     position: absolute;
     z-index: -1;
