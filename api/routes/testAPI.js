@@ -1,8 +1,8 @@
 const express = require("express");
-const router = express.Router();
+const testAPIRouter = express.Router();
 
-router.get("/", (req, res, next) => {
+testAPIRouter.get("/", (req, res, next) => {
   res.send("Connected to backend");
 });
 
-module.exports = router;
+module.exports = testAPIRouter;
