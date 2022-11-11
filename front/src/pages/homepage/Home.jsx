@@ -6,7 +6,13 @@ import Todos from "./todos/Todos";
 
 import "./Home.css";
 
-export default function Home({ calendarData, setCalendarData, githubData }) {
+export default function Home({
+  calendarData,
+  setCalendarData,
+  githubData,
+  fitnessData,
+  stellarisData,
+}) {
   return (
     <div className="Home">
       <header className="Home-header">
@@ -17,12 +23,20 @@ export default function Home({ calendarData, setCalendarData, githubData }) {
         <GithubContribution githubData={githubData} />
         <Todos />
         <div>
-          <Link to="/sports">
-            <button>SPORT</button>
-          </Link>
-          <Link to="/stellaris">
-            <button>STELLARIS</button>
-          </Link>
+          {fitnessData !== null ? (
+            <Link to="/fitness">
+              <button>FITNESS</button>
+            </Link>
+          ) : (
+            <button id="Home-link-disabled">FITNESS UNAVAILABLE</button>
+          )}
+          {stellarisData !== null ? (
+            <Link to="/stellaris">
+              <button>STELLARIS</button>
+            </Link>
+          ) : (
+            <button id="Home-link-disabled">STELLARIS UNAVAILABLE</button>
+          )}
         </div>
       </header>
     </div>

@@ -1,9 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 front/node_modules
 front/.pnp
 front/.pnp.js
+api/node_modules
 
 # testing
 front/coverage
@@ -22,11 +21,11 @@ front/npm-debug.log*
 front/yarn-debug.log*
 front/yarn-error.log*
 
-# backend
-api/node_modules
-
 # stellaris common files
 api/assets/stellaris
 
 # Stuff that helps me develop but not related
 misc
+
+# env files
+api/mail/.env

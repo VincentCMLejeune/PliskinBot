@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Components
 import Home from "./pages/homepage/Home";
 import Loading from "./pages/loading/Loading";
-import Sport from "./pages/sport/Sport";
+import Fitness from "./pages/fitness/Fitness";
 import Stellaris from "./pages/stellaris/Stellaris";
 
 // Styling
@@ -16,7 +16,7 @@ export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [calendarData, setCalendarData] = useState(null);
   const [githubData, setGithubData] = useState(null);
-  const [sportData, setSportData] = useState(null);
+  const [fitnessData, setFitnessData] = useState(null);
   const [stellarisData, setStellarisData] = useState(null);
   const [testData, setTestData] = useState(null);
 
@@ -39,7 +39,7 @@ export default function App() {
 
     axios
       .get("http://localhost:9000/fitness")
-      .then((res) => setSportData(res.data))
+      .then((res) => setFitnessData(res.data))
       .catch((err) => console.log(err));
 
     axios
@@ -63,13 +63,13 @@ export default function App() {
     if (
       calendarData !== null &&
       githubData !== null &&
-      sportData !== null &&
+      fitnessData !== null &&
       stellarisData !== null &&
       testData !== null
     ) {
       setDataLoaded(true);
     }
-  }, [calendarData, githubData, sportData, stellarisData, testData]);
+  }, [calendarData, githubData, fitnessData, stellarisData, testData]);
 
   return (
     <div className="App">
@@ -84,10 +84,15 @@ export default function App() {
                   calendarData={calendarData}
                   setCalendarData={setCalendarData}
                   githubData={githubData}
+                  fitnessData={fitnessData}
+                  stellarisData={stellarisData}
                 />
               }
             />
-            <Route path="/sports" element={<Sport sportData={sportData} />} />
+            <Route
+              path="/fitness"
+              element={<Fitness fitnessData={fitnessData} />}
+            />
             <Route
               path="/stellaris"
               element={<Stellaris stellarisData={stellarisData} />}
@@ -100,7 +105,7 @@ export default function App() {
           githubData={githubData}
           testData={testData}
           stellarisData={stellarisData}
-          sportData={sportData}
+          fitnessData={fitnessData}
           setDataLoaded={setDataLoaded}
         />
       )}
