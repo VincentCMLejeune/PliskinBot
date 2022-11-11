@@ -8,7 +8,7 @@ import "./Fitness.css";
 export default function Fitness({ fitnessData }) {
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [exercises, setExercises] = useState([]);
-  const [fitnesssFilter, setFitnessFilter] = useState({
+  const [fitnessFilter, setFitnessFilter] = useState({
     upper: true,
     lower: true,
     abs: true,
@@ -46,15 +46,15 @@ export default function Fitness({ fitnessData }) {
           Fitness
         </div>
         <button onClick={() => setShowNewExercise(true)}>Add Fitness</button>
-        <div className="fitnesss-filters">
+        <div className="fitness-filters">
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.upper}
+              checked={fitnessFilter.upper}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  upper: !fitnesssFilter.upper,
+                  ...fitnessFilter,
+                  upper: !fitnessFilter.upper,
                 })
               }
             />
@@ -63,11 +63,11 @@ export default function Fitness({ fitnessData }) {
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.lower}
+              checked={fitnessFilter.lower}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  lower: !fitnesssFilter.lower,
+                  ...fitnessFilter,
+                  lower: !fitnessFilter.lower,
                 })
               }
             />
@@ -76,23 +76,23 @@ export default function Fitness({ fitnessData }) {
           <label>
             <input
               type="checkbox"
-              checked={fitnesssFilter.abs}
+              checked={fitnessFilter.abs}
               onChange={() =>
                 setFitnessFilter({
-                  ...fitnesssFilter,
-                  abs: !fitnesssFilter.abs,
+                  ...fitnessFilter,
+                  abs: !fitnessFilter.abs,
                 })
               }
             />
             Abs
           </label>
         </div>
-        <div className="fitnesss-list">
-          {fitnesssFilter.upper === true &&
+        <div className="fitness-list">
+          {fitnessFilter.upper === true &&
             exercises.upper &&
             exercises.upper.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Upper body</div>
+                <div className="fitness-list-localization">Upper body</div>
                 {exercises.upper.map((fitness, id) => (
                   <div key={id}>
                     <div>{fitness.muscle}</div>
@@ -101,11 +101,11 @@ export default function Fitness({ fitnessData }) {
                 ))}
               </>
             )}
-          {fitnesssFilter.lower === true &&
+          {fitnessFilter.lower === true &&
             exercises.lower &&
             exercises.lower.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Lower body</div>
+                <div className="fitness-list-localization">Lower body</div>
                 {exercises.lower.map((fitness, id) => (
                   <div key={id}>
                     <div>{fitness.muscle}</div>
@@ -114,11 +114,11 @@ export default function Fitness({ fitnessData }) {
                 ))}
               </>
             )}
-          {fitnesssFilter.abs === true &&
+          {fitnessFilter.abs === true &&
             exercises.abs &&
             exercises.abs.length > 0 && (
               <>
-                <div className="fitnesss-list-localization">Abs</div>
+                <div className="fitness-list-localization">Abs</div>
                 {exercises.abs.map((fitness, id) => (
                   <div key={id}>
                     <div>{fitness.muscle}</div>
