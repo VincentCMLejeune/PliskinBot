@@ -6,6 +6,7 @@ api/node_modules
 
 # testing
 front/coverage
+api/coverage
 
 # production
 front/build
