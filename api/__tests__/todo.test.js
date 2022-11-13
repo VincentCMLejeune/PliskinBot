@@ -12,3 +12,21 @@ describe("GET Todo", () => {
     );
   });
 });
+
+describe("POST Todo", () => {
+  test("post request should run correctly", async () => {
+    const res = await request(app).post("/todo").send({ todo: "test" });
+    expect(res.statusCode).toEqual(201);
+    expect(res.body.todo).toBeDefined();
+    expect(res.body.todo).toEqual("test");
+  });
+  test("post request should fail if no todo is provided", async () => {
+    const res = await request(app).post("/todo").send({});
+    expect(res.statusCode).toEqual(400);
+  })
+  test("post request should fail if todo is empty", async () => {
+    const res = await request(app).post("/todo").send({ todo: "" });
+    expect(res.statusCode).toEqual(400);
+  })
+});
+

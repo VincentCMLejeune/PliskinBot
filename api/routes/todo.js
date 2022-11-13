@@ -1,6 +1,7 @@
 const express = require("express");
 const todoRouter = express.Router();
 const sqlite3 = require("sqlite3");
+const createError = require("http-errors");
 const db = new sqlite3.Database("./db.sqlite");
 
 todoRouter.get("/", (req, res, next) => {
@@ -15,9 +16,15 @@ todoRouter.get("/", (req, res, next) => {
 });
 
 todoRouter.post("/", (req, res, next) => {
-  console.log("POST request to add : " + req.body.todo);
+  const todo = req.body.todo;
+  if (!todo) {
+    return next(createError(400, "Missing todo in request."));
+  }
+  if (todo.length === 0) {
+    return next(createError(400, "Todo is empty."));
+  }
   try {
-    db.run(`INSERT INTO Todo (name) VALUES ("${req.body.todo}")`);
+    db.run(`INSERT INTO Todo (name) VALUES ("${todo}")`);
     res.status(201).send(req.body);
   } catch (err) {
     res.status(500).send(err);
@@ -25,7 +32,6 @@ todoRouter.post("/", (req, res, next) => {
 });
 
 todoRouter.delete("/", (req, res, next) => {
-  console.log("DELETE request to remove : " + req.body.todo);
   try {
     db.run(`DELETE FROM Todo WHERE name="${req.body.todo}"`);
     res.status(204).send();
