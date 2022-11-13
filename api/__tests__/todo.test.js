@@ -1,4 +1,5 @@
 const request = require("supertest");
+
 const app = require("../app");
 
 describe("GET Todo", () => {
@@ -14,6 +15,9 @@ describe("GET Todo", () => {
 });
 
 describe("POST Todo", () => {
+  afterAll(async () => {
+    const res = await request(app).delete("/todo").send({ todo: "test" });
+  });
   test("post request should run correctly", async () => {
     const res = await request(app).post("/todo").send({ todo: "test" });
     expect(res.statusCode).toEqual(201);
@@ -23,10 +27,9 @@ describe("POST Todo", () => {
   test("post request should fail if no todo is provided", async () => {
     const res = await request(app).post("/todo").send({});
     expect(res.statusCode).toEqual(400);
-  })
+  });
   test("post request should fail if todo is empty", async () => {
     const res = await request(app).post("/todo").send({ todo: "" });
     expect(res.statusCode).toEqual(400);
-  })
+  });
 });
-
