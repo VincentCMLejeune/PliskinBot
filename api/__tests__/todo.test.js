@@ -33,3 +33,35 @@ describe("POST Todo", () => {
     expect(res.statusCode).toEqual(400);
   });
 });
+
+describe("DELETE Todo", () => {
+  beforeEach(async () => {
+    const res = await request(app).post("/todo").send({ todo: "test" });
+  });
+  afterAll(async () => {
+    const res = await request(app).delete("/todo").send({ todo: "test" });
+  });
+  test("delete request should run correctly", async () => {
+    const res = await request(app).delete("/todo").send({ todo: "test" });
+    expect(res.statusCode).toEqual(204);
+  });
+  test("delete request should fail if no todo is provided", async () => {
+    const res = await request(app).delete("/todo").send({});
+    expect(res.statusCode).toEqual(400);
+  });
+  test("delete request should fail if todo is empty", async () => {
+    const res = await request(app).delete("/todo").send({ todo: "" });
+    expect(res.statusCode).toEqual(400);
+  });
+  test("delete request should fail if todo is not found", async () => {
+    const res = await request(app).delete("/todo").send({ todo: "not found" });
+    expect(res.statusCode).toEqual(404);
+  });
+  test("correct delete request should remove todo from list", async () => {
+    const res = await request(app).delete("/todo").send({ todo: "test" });
+    const todoList = await request(app).get("/todo");
+    expect(todoList.body.todos.some((todo) => todo.name === "test")).toBe(
+      false
+    );
+  });
+});
