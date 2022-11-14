@@ -1,9 +1,12 @@
 const express = require("express");
-const todoRouter = express.Router();
-const sqlite3 = require("sqlite3");
 const createError = require("http-errors");
+
+const todoRouter = express.Router();
+
+const sqlite3 = require("sqlite3");
 const db = new sqlite3.Database("./db.sqlite");
 
+//UNAUTHORIZE DUPLICATES
 todoRouter.get("/", (req, res, next) => {
   db.all("SELECT * FROM Todo", (err, rows) => {
     if (err) {
