@@ -43,4 +43,28 @@ todoRouter.delete("/", (req, res, next) => {
   }
 });
 
+todoRouter.put("/", (req, res, next) => {
+  const todo = req.body.todo;
+  const newTodo = req.body.newTodo;
+  console.log(req.body);
+  if (!todo) {
+    return next(createError(400, "Missing todo in request."));
+  }
+  if (todo.length === 0) {
+    return next(createError(400, "Todo is empty."));
+  }
+  if (!newTodo) {
+    return next(createError(400, "Missing newTodo in request."));
+  }
+  if (newTodo.length === 0) {
+    return next(createError(400, "New todo is empty."));
+  }
+  try {
+    db.run(`UPDATE Todo SET name="${newTodo}" WHERE name="${todo}"`);
+    res.status(200).send();
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = todoRouter;
