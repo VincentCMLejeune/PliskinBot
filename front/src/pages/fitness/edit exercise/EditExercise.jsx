@@ -1,41 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import "./AddExercise.css";
+import "./EditExercise.css";
 
 // import axios from "axios";
 
-export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
-  const [newExercise, setNewExercise] = useState({
-    muscle: "",
-    localization: "upper",
-    weight: 20,
+export default function EditExercise({ exerciseToEdit, setExerciseToEdit }) {
+  const [updatedExercise, setUpdatedExercise] = useState({
+    muscle: exerciseToEdit.muscle,
+    localization: exerciseToEdit.localization,
+    weight: exerciseToEdit.weight,
   });
 
-  const postNewExercise = (e) => {
+  const updateExercise = (e) => {
     e.preventDefault();
-    const exerciseToPost = {
-      muscle: newExercise.muscle,
-      localization: newExercise.localization,
-      weight: newExercise.weight,
+    const exerciseToPut = {
+      muscle: updatedExercise.muscle,
+      localization: updatedExercise.localization,
+      weight: updatedExercise.weight,
     };
-    console.log(exerciseToPost);
+    console.log(exerciseToPut);
   };
 
   return (
     <>
       <div
         className="editexercise-shadowbackground"
-        onClick={() => setShowEditExercise(false)}
+        onClick={() => setExerciseToEdit(null)}
       ></div>
       <div className="editexercise">
-        <h1>NEW EXERCISE</h1>
-        <form onSubmit={() => postNewExercise}>
+        <h1>EDIT EXERCISE</h1>
+        <form onSubmit={() => updateExercise}>
           <label>Muscle:</label>
           <input
             type="text"
-            value={newExercise.muscle}
+            value={updatedExercise.muscle}
             onChange={(e) =>
-              setNewExercise({ ...newExercise, muscle: e.target.value })
+              setUpdatedExercise({ ...updatedExercise, muscle: e.target.value })
             }
           />
           <label>Localization:</label>
@@ -44,9 +44,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             id="upper"
             name="localization"
             value="upper"
-            checked={newExercise.localization === "upper"}
+            checked={updatedExercise.localization === "upper"}
             onChange={() =>
-              setNewExercise({ ...newExercise, localization: "upper" })
+              setUpdatedExercise({ ...updatedExercise, localization: "upper" })
             }
           />
           <label>Upper Body</label>
@@ -55,9 +55,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             id="lower"
             name="localization"
             value="lower"
-            checked={newExercise.localization === "lower"}
+            checked={updatedExercise.localization === "lower"}
             onChange={() =>
-              setNewExercise({ ...newExercise, localization: "lower" })
+              setUpdatedExercise({ ...updatedExercise, localization: "lower" })
             }
           />
           <label>Lower Body</label>
@@ -66,9 +66,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             id="abs"
             name="localization"
             value="abs"
-            checked={newExercise.localization === "abs"}
+            checked={updatedExercise.localization === "abs"}
             onChange={() =>
-              setNewExercise({ ...newExercise, localization: "abs" })
+              setUpdatedExercise({ ...updatedExercise, localization: "abs" })
             }
           />
           <label>Abs</label>
@@ -78,9 +78,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight - 10,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight - 10,
                 });
               }}
             >
@@ -89,9 +89,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight - 5,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight - 5,
                 });
               }}
             >
@@ -100,21 +100,21 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight - 1,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight - 1,
                 });
               }}
             >
               -1
             </button>
-            <div>{newExercise.weight}</div>
+            <div>{updatedExercise.weight}</div>
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight + 1,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight + 1,
                 });
               }}
             >
@@ -123,9 +123,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight + 5,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight + 5,
                 });
               }}
             >
@@ -134,9 +134,9 @@ export default function AddExercise({ setShowEditExercise, exerciseToEdit }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setNewExercise({
-                  ...newExercise,
-                  weight: newExercise.weight + 10,
+                setUpdatedExercise({
+                  ...updatedExercise,
+                  weight: updatedExercise.weight + 10,
                 });
               }}
             >
