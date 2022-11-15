@@ -35,6 +35,13 @@ todoRouter.post("/", (req, res, next) => {
 });
 
 todoRouter.delete("/", (req, res, next) => {
+  const todo = req.body.todo;
+  if (!todo) {
+    return next(createError(400, "Missing todo in request."));
+  }
+  if (todo.length === 0) {
+    return next(createError(400, "Todo is empty."));
+  }
   try {
     db.run(`DELETE FROM Todo WHERE name="${req.body.todo}"`);
     res.status(204).send();
