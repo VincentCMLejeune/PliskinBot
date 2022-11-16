@@ -105,6 +105,7 @@ export default function Fitness({ fitnessData }) {
                   <div key={id}>
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
+                    <div>{exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
@@ -121,6 +122,7 @@ export default function Fitness({ fitnessData }) {
                   <div key={id}>
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
+                    <div>{exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
@@ -137,6 +139,7 @@ export default function Fitness({ fitnessData }) {
                   <div key={id}>
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
+                    <div>{exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
