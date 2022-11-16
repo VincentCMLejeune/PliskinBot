@@ -15,13 +15,14 @@ fitnessRouter.get("/", (req, res, next) => {
 });
 
 fitnessRouter.post("/", (req, res, next) => {
-  console.log("POST request to add : " + req.body.muscle);
+  console.log(req.body);
   const muscle = req.body.muscle;
   const localization = req.body.localization;
   const weight = req.body.weight;
-  const params = [muscle, localization, weight];
+  const weightmarie = req.body.weightmarie;
+  const params = [muscle, localization, weight, weightmarie];
   const sql =
-    "INSERT INTO Fitness (muscle, localization, weight) VALUES (?, ?, ?)";
+    "INSERT INTO Fitness (muscle, localization, weight, weightmarie) VALUES (?, ?, ?, ?)";
   db.run(sql, params, (err) => {
     if (err) {
       res.status(500).send(err);
