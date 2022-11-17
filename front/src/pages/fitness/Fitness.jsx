@@ -15,6 +15,7 @@ export default function Fitness({ fitnessData }) {
     lower: true,
     abs: true,
   });
+  const [selectedExercises, setSelectedExercises] = useState([]);
 
   useEffect(() => {
     const sortedExercises = {
@@ -33,6 +34,22 @@ export default function Fitness({ fitnessData }) {
     }
     setExercises(sortedExercises);
   }, [fitnessData]);
+
+  const toggleExercise = (exercise) => {
+    if (selectedExercises.includes(exercise)) {
+      setSelectedExercises(
+        selectedExercises.filter((selectedExercise) => {
+          return selectedExercise !== exercise;
+        })
+      );
+    } else {
+      setSelectedExercises([...selectedExercises, exercise]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(selectedExercises);
+  }, [selectedExercises]);
 
   return (
     <>
@@ -103,6 +120,11 @@ export default function Fitness({ fitnessData }) {
                 <div className="fitness-list-localization">Upper body</div>
                 {exercises.upper.map((exercise, id) => (
                   <div key={id}>
+                    <input
+                      type="checkbox"
+                      checked={selectedExercises.includes(exercise)}
+                      onChange={() => toggleExercise(exercise)}
+                    />
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
                     <div>{exercise.weightmarie}</div>
@@ -120,6 +142,11 @@ export default function Fitness({ fitnessData }) {
                 <div className="fitness-list-localization">Lower body</div>
                 {exercises.lower.map((exercise, id) => (
                   <div key={id}>
+                    <input
+                      type="checkbox"
+                      checked={selectedExercises.includes(exercise)}
+                      onChange={() => toggleExercise(exercise)}
+                    />
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
                     <div>{exercise.weightmarie}</div>
@@ -137,6 +164,11 @@ export default function Fitness({ fitnessData }) {
                 <div className="fitness-list-localization">Abs</div>
                 {exercises.abs.map((exercise, id) => (
                   <div key={id}>
+                    <input
+                      type="checkbox"
+                      checked={selectedExercises.includes(exercise)}
+                      onChange={() => toggleExercise(exercise)}
+                    />
                     <div>{exercise.muscle}</div>
                     <div>{exercise.weight}</div>
                     <div>{exercise.weightmarie}</div>
