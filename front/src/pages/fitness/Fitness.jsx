@@ -119,15 +119,15 @@ export default function Fitness({ fitnessData }) {
               <>
                 <div className="fitness-list-localization">Upper body</div>
                 {exercises.upper.map((exercise, id) => (
-                  <div key={id}>
+                  <div key={id} className="fitness-list-item">
                     <input
                       type="checkbox"
                       checked={selectedExercises.includes(exercise)}
                       onChange={() => toggleExercise(exercise)}
                     />
                     <div>{exercise.muscle}</div>
-                    <div>{exercise.weight}</div>
-                    <div>{exercise.weightmarie}</div>
+                    <div>V: {exercise.weight}</div>
+                    <div>M: {exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
@@ -141,15 +141,15 @@ export default function Fitness({ fitnessData }) {
               <>
                 <div className="fitness-list-localization">Lower body</div>
                 {exercises.lower.map((exercise, id) => (
-                  <div key={id}>
+                  <div key={id} className="fitness-list-item">
                     <input
                       type="checkbox"
                       checked={selectedExercises.includes(exercise)}
                       onChange={() => toggleExercise(exercise)}
                     />
                     <div>{exercise.muscle}</div>
-                    <div>{exercise.weight}</div>
-                    <div>{exercise.weightmarie}</div>
+                    <div>V: {exercise.weight}</div>
+                    <div>M: {exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
@@ -163,15 +163,15 @@ export default function Fitness({ fitnessData }) {
               <>
                 <div className="fitness-list-localization">Abs</div>
                 {exercises.abs.map((exercise, id) => (
-                  <div key={id}>
+                  <div key={id} className="fitness-list-item">
                     <input
                       type="checkbox"
                       checked={selectedExercises.includes(exercise)}
                       onChange={() => toggleExercise(exercise)}
                     />
                     <div>{exercise.muscle}</div>
-                    <div>{exercise.weight}</div>
-                    <div>{exercise.weightmarie}</div>
+                    <div>V : {exercise.weight}</div>
+                    <div>M: {exercise.weightmarie}</div>
                     <button onClick={() => setExerciseToEdit(exercise)}>
                       Edit
                     </button>
