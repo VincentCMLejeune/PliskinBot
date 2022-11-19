@@ -129,3 +129,9 @@
     transform: translateY(100%);
   }
 }
+
+.fitness-list-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 1rem;
+}
